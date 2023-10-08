@@ -1,93 +1,80 @@
-/* Reset some default styles for consistency */
-body, h1, h2, p {
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-/* Style the header and navigation */
-header {
-    background-color: #33383a;
-    color: #fff;
-    padding: 10px 0;
-}
 
-nav {
+
+.container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    justify-content: flex-start;
+    text-align: center;
+    height: 100vh;
+  }
+  
+  .container h1 {
+    margin-top: 0; /* Remove default margin for h1 element */
+    margin-bottom: auto; /* Push h1 element to the top of its container */
+    font-size: xx-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.logo {
-    width: 120px;
-    
-}
-
-.profile_logo {
-    width: 40px;
-}
-
-.nav-links {
-    list-style: none;
+body {
     display: flex;
-    /* font-family: Georgia, 'Times New Roman', Times, serif; */
-    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    background-image: url(../images/background_web.jpg);
 }
 
-.nav-links li {
-    margin-right: 20px;
-    margin-top: 10px;
+.form {
+    width: 600px;
+    border-radius: 8px;
+    background-color: white;
+    /* height:fit-content;  */
+    padding: 5px 10px;
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
+label {
+    display: block;
+    font-weight: bolder;
+    margin: 5px 0px;
 }
 
-/* Style the main content area */
-.main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.hero {
-    background-image: url('../images/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg');
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    padding: 100px 0;
-    color: #fff;
-}
-
-.hero h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    text-decoration: none;
+input {
+    width: 100%;
+    padding: 8px 5px;
     border-radius: 5px;
-    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-/* Style the footer */
-footer {
-    background-color: #33383a;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
+#submit-btn {
+    border: none;
+    background-color: #5caafc;
+    width: 100%;
+    padding: 10px 8px;
+    color: white;
+    font-weight: bolder;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 9px 0px;
+}
+
+p {
+    font-size: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bolder;
+    color: #5caafc;
 }

@@ -2,40 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Asset Management System</title>
+    <title>Digital Assest Management Website</title>
     <link rel="stylesheet" href="../css/indexStyle.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
+    <!-- <script src="../js/auth.js"></script> -->
 </head>
 <body>
-    <header>
-        <nav>
-            <img src="../images/dams_logo.png" class="logo" alt="logo">
-            <!-- <div class="logo" >DAMS </div> -->
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="assets.html">Assets</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Upload</a></li>
-                <a href="profile.html">  <img src="../images/profile.png" class="profile_logo" alt="profile_logo" /> </a>
-               
-                
-            </ul> 
-            
-        </nav>
-    </header>
+    
+    <div class="container">
+        <h1 > <img src="../images/dams_logo.png" class="logo" alt="logo"> DAMS  </h1>    
+    </div>
+    
+    <br></br>
+    <div class="form">
+        <div class="email">
+            <!------E mail -->
+            <label for="email">E-Mail</label>
+            <input type="email" name="email" id="email" placeholder="Enter email">
+        </div>
 
-    <main>
-        <section class="hero">
-            <h1>Welcome to the Digital Asset Management System</h1>
-            <p>Your one-stop solution for organizing and managing digital assets.</p>
-            <a href="#" class="cta-button">Get Started</a>
-        </section>
+        <div class="password">
+            <!------Password -->
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter password">
+        </div>
+        
+        <div class="passwordConfirm">
+            <!------Password -->
+            <label for="passwordConfirm">Confirm Password</label>
+            <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirm password">
+        </div>
 
-        <!-- Add more sections for your content here -->
-    </main>
 
-    <footer>
-        <p>&copy; 2023 Digital Asset Management System</p>
-    </footer>
+        
+    <!---Sign up button-->
+    <button id="submit-btn" onclick="SignUp()"> Signup </button>
+        
+    <!----Sign in (if already have an account)-->
+    <p>Already have an account ?</p>
+    <span> <a href="signIn.html"> Sign In</a></span>
+
+    </div>
+    <script src="../javascript/auth.js"></script>
 </body>
 </html>
