@@ -36,6 +36,7 @@
               // Signed up 
               window.alert("You are Signed Up!");
               console.log(result);
+              window.location.href = "signIn.html";
               // ...
            })
            .catch((error) => {
