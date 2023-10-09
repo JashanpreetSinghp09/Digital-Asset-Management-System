@@ -1,8 +1,3 @@
-*::selection {
-    background-color: teal;
-    color: white;
-}
-
 /* Reset some default styles for consistency */
 body, h1, h2, p {
     margin: 0;
@@ -15,15 +10,24 @@ h1, .black-spaced {
     color: black;
 }
 
+.content-description {
+    color: black;
+    text-align: justify;
+    text-align-last: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
 .nav-hover {
     letter-spacing: 5px;
     color: black;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .nav-hover:hover {
-    background-color: teal;
+    background-color: rgba(0, 255, 255, 0.226);
     border-radius: 10px;
-    color: white;
 }
 
 /* Style the header and navigation */
@@ -112,7 +116,6 @@ nav {
 
 /* Style the footer */
 footer {
-    
     background-color: #33383a;
     color: #fff;
     text-align: center;
