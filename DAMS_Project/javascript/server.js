@@ -16,6 +16,9 @@ async function startServer() {
       useUnifiedTopology: true,
     });
     console.log("Connected to MongoDB");
+
+    //Importing user model from db.js
+    const User = require("./db");
     
     try {
       admin.initializeApp({
@@ -46,28 +49,47 @@ app.use('/javascript', (req, res, next) => {
 app.use('/css', express.static(path.join(__dirname, '..', 'css')));
 app.use('/images', express.static(path.join(__dirname, '..', 'images')));
 
-    // Add these routes to your server code
-  app.post('/signup', async (req, res) => {
-    console.log(req.body);
-    const email = req.body.email;
-    const password = req.body.password;
+  
 
-    try {
-      // Use Firebase Admin SDK to create a user
-      const user = await admin.auth().createUser({
-        email,
-        password,
+//User registration in the servers
+app.post('/signup', async (req, res) => {
+  console.log(req.body);
+  const email = req.body.email;
+  const password = req.body.password;
+
+  try {
+    // Use Firebase Admin SDK to create a user
+    const user = await admin.auth().createUser({
+      email,
+      password,
+    });
+    console.log('User created:', user.uid);
+
+    // Create a new document in MongoDB to store the email and UID
+    const newUser = new User({
+      email: user.email,
+      firebaseUid: user.uid
+    });
+
+    newUser.save()
+      .then((savedUser) => {
+        console.log('User data saved successfully:', savedUser);
+        // Handle successful sign-up
+        res.json({ success: true });
+      })
+      .catch((error) => {
+        console.error('Error saving user data:', error);
+        res.json({ success: false, error: error.message });
       });
-      console.log('User created:', user.uid);
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.json({ success: false, error: error.message });
+  }
+});
 
-      // Handle successful sign-up
-      res.json({ success: true });
-    } catch (error) {
-      console.error('Error creating user:', error);
-      res.json({ success: false, error: error.message });
-      }
-  });
 
+
+//Pointing the server.js to index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'html', 'index.html'));
 });
