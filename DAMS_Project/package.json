@@ -1,0 +1,14 @@
+{
+    "name": "your-app-name",
+    "version": "1.0.0",
+    "description": "Your application description",
+    "main": "server.js", 
+    "scripts": {
+      "start": "node server.js" 
+    },
+    "proxy": "http://localhost:4000",
+    "dependencies": {
+      "express": "^4.17.1", 
+      "mongoose": "^6.0.2" 
+  }
+}
