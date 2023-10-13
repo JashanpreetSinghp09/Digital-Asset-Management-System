@@ -9,10 +9,16 @@ function SignUp() {
    if (!(password == confirmPassword)) {
      window.alert("Password does not match!");
    } else {
+
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
      
-     const data = {
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password
+
     };
 
     console.log(data);

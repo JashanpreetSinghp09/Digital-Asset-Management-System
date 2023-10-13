@@ -56,6 +56,8 @@ app.post('/signup', async (req, res) => {
   console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
 
   try {
     // Use Firebase Admin SDK to create a user
@@ -68,7 +70,9 @@ app.post('/signup', async (req, res) => {
     // Create a new document in MongoDB to store the email and UID
     const newUser = new User({
       email: user.email,
-      firebaseUid: user.uid
+      firebaseUid: user.uid,
+      firstName: firstName,
+      lastName: lastName
     });
 
     newUser.save()
