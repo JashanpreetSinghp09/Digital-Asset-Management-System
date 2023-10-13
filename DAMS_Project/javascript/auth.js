@@ -93,23 +93,61 @@ function SignIn() {
 });
 }
 
-function ChangeUserDetails(){
+//Function for changing user details
+function ChangeUserDetails() {
+  const newEmail = document.getElementById('newEmail').value; // Get the new email input value
+  const newFirstName = document.getElementById('newFirstName').value;
+  const newLastName = document.getElementById('newLastName').value;
 
- const newFirstName = document.getElementById('newFirstName').value;
- const newLastName = document.getElementById('newLastName').value;
- 
- const user = firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
 
- user.updateEmail(newEmail)
-   .then(() => {
-     console.log('User email updated successfully');
-   })
-   .catch((error) => {
-     console.error('Error updating user email:', error);
-   });
+  const data = {
+    email: newEmail,
+    firebaseUid: user.uid,
+    firstName: newFirstName,
+    lastName: newLastName
 
- 
+  };
+
+fetch('/changeUserDetails', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify( data ),
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then((data) => {
+    if (data.success) {
+      window.alert("User Details changed successfully!");
+  
+      // Trigger sign-out and redirection
+      firebase.auth().signOut().then(function() {
+        // Sign-out successful, redirect to signin.html
+        window.location.href = "signin.html";
+      }).catch(function(error) {
+        console.error('Error signing out:', error);
+      });
+    } else {
+      window.alert("Error: " + data.error);
+    }
+  })
+  .catch((error) => {
+    console.error('Fetch error:', error);
+  });
 }
+
+function isValidEmail(email) {
+  // A simple email validation regex (you can use a more complex one if needed)
+  const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+  return emailRegex.test(email);
+}
+
 
 //Change password
 

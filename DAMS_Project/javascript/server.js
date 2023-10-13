@@ -91,7 +91,43 @@ app.post('/signup', async (req, res) => {
   }
 });
 
+//Changing user details in the server
+app.post('/changeUserDetails', async (req, res) => {
+  console.log(req.body);
+  const { email, firebaseUid, firstName, lastName } = req.body;
 
+  try {
+    // Use Firebase Admin SDK to update the user's email
+    await admin.auth().updateUser(firebaseUid, { email });
+
+    // Update the user's details in the MongoDB database
+    const updatedUser = await User.findOneAndUpdate(
+      { firebaseUid: firebaseUid },
+      { email, firstName, lastName },
+      { new: true } // To get the updated document
+    );
+
+    if (updatedUser) {
+      res.json({ success: true, updatedUser });
+    } else {
+      res.json({ success: false, error: 'User not found' });
+    }
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+});
+
+//Used for fetching email from server
+app.get('/getUid', async (req, res) => {
+  const email = req.query.email; // You can pass the email as a query parameter
+  const user = await User.findOne({ email: email }); // Query MongoDB for the user by email
+
+  if (user) {
+    res.json({ uid: user.firebaseUid });
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
+});
 
 //Pointing the server.js to index.html
 app.get('/', (req, res) => {
