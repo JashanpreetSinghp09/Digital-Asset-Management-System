@@ -11,8 +11,12 @@
     <link rel="shortcut icon" type="image/png" href="../images/dams_logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" >
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
 </head>
 <body>
+    <script src="../javascript/auth.js"></script>
     <script src="../javascript/profile.js"></script>
     <header>
         <nav>
@@ -50,22 +54,22 @@
                                             <h4 class="mb-4 mt-0">User details</h4>
                                             <!-- First Name -->
                                             <div class="col-md-6">
-                                                <label class="form-label">First Name *</label>
-                                                <input type="text" class="form-control" placeholder="" aria-label="First name" value="Scaralet">
+                                                <label class="form-label" for="newFirstName">First Name *</label>
+                                                <input type="text" id ="newFirstName" class="form-control" placeholder="" aria-label="First name" value="Scaralet">
                                             </div>
                                             <!-- Last name -->
                                             <div class="col-md-6">
-                                                <label class="form-label">Last Name *</label>
-                                                <input type="text" class="form-control" placeholder="" aria-label="Last name" value="Doe">
+                                                <label class="form-label" for="newLastName">Last Name *</label>
+                                                <input type="text" id ="newLastName" class="form-control" placeholder="" aria-label="Last name" value="Doe">
                                             </div>
                                             
                                             <!-- Username/Email -->
                                             <div class="col-md-6">
-                                                <label for="inputEmail4" class="form-label">Email *</label>
-                                                <input type="email" class="form-control" id="inputEmail4" value="example@homerealty.com">
+                                                <label for="newEmail" class="form-label">Email *</label>
+                                                <input type="email" class="form-control" id="newEmail" value="example@homerealty.com">
                                             </div>
                                             <div class="gap-3 d-md-flex justify-content-md-end text-center update_btn">
-                                                <button type="button" class="btn btn-danger btn-lg">Update Details</button>
+                                                <button type="button" class="btn btn-danger btn-lg" onclick="ChangeUserDetails()">Update Details</button>
                                             </div>
                                             
                                         </div> <!-- Row END -->
@@ -82,21 +86,21 @@
                                             <h4 class="my-4">Change Password</h4>
                                             <!-- Old password -->
                                             <div class="col-md-6">
-                                                <label for="exampleInputPassword1" class="form-label">Old password *</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1">
+                                                <label for="oldPassword" class="form-label">Old password *</label>
+                                                <input type="password" class="form-control" id="oldPassword">
                                             </div>
                                             <!-- New password -->
                                             <div class="col-md-6">
-                                                <label for="exampleInputPassword2" class="form-label">New password *</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword2">
+                                                <label for="newPassword1" class="form-label">New password *</label>
+                                                <input type="password" class="form-control" id="newPassword1">
                                             </div>
                                             <!-- Confirm password -->
                                             <div class="col-md-12">
-                                                <label for="exampleInputPassword3" class="form-label">Confirm Password *</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword3">
+                                                <label for="confirmPassword1" class="form-label">Confirm Password *</label>
+                                                <input type="password" class="form-control" id="confirmPassword1">
                                             </div>
                                             <div class="gap-3 d-md-flex justify-content-md-end text-center update_btn">
-                                                <button type="button" class="btn btn-danger btn-lg">Update Password</button>
+                                                <button type="button" class="btn btn-danger btn-lg" onclick="UpdatePassword()">Update Password</button>
                                             </div>
                                         </div>
                                     </div>
