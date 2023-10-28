@@ -4,124 +4,128 @@ body {
 }
 
 .bg-secondary-soft {
-        background-color: rgba(208, 212, 217, 0.1) !important;
-    }
-    .rounded {
-        border-radius: 5px !important;
-    }
-    .py-5 {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-    }
-    .px-4 {
-        padding-right: 1.5rem !important;
-        padding-left: 1.5rem !important;
-    }
-    .file-upload .square {
-        height: 250px;
-        width: 250px;
-        margin: auto;
-        vertical-align: middle;
-        border: 1px solid #e5dfe4;
-        background-color: #fff;
-        border-radius: 5px;
-    }
-    .text-secondary {
-        --bs-text-opacity: 1;
-        color: rgba(208, 212, 217, 0.5) !important;
-    }
+    background-color: rgba(208, 212, 217, 0.1) !important;
+}
+
+.rounded {
+    border-radius: 5px !important;
+}
+
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.px-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+}
+
+.file-upload .square {
+    height: 250px;
+    width: 250px;
+    margin: auto;
+    vertical-align: middle;
+    border: 1px solid #e5dfe4;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.text-secondary {
+    --bs-text-opacity: 1;
+    color: rgba(208, 212, 217, 0.5) !important;
+}
   
-
-    .update_btn button {
-        background-color: #ff0000; /* Set the initial background color */
-        color: #fff; /* Set the text color */
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s; /* Add a smooth transition for the background color */
-    }
+.update_btn button {
+    background-color: #ff0000; /* Set the initial background color */
+    color: #fff; /* Set the text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add a smooth transition for the background color */
+}
     
-    .update_btn button:hover {
-        background-color: #ff5555; /* Change the background color on hover */
-    }
+.update_btn button:hover {
+    background-color: #ff5555; /* Change the background color on hover */
+}
 
-    .form-control {
-        display: block;
-        width: 100%;
-        padding: 0.5rem 1rem;
-        font-size: 0.9375rem;
-        font-weight: 400;
-        line-height: 1.6;
-        color: #29292e;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #e5dfe4;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border-radius: 5px;
-        -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-        transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-    }
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #29292e;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e5dfe4;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 5px;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
 
-    h1, h2, .black-spaced {
-        letter-spacing: 5px;
-        color: black;
-    }
+h1, h2, .black-spaced {
+    letter-spacing: 5px;
+    color: black;
+}
 
-    .main {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-    .profileimg {
-        width: 140px;
-        height: 110px;
-        border-radius: 50%;
-      }
+.profileimg {
+    width: 140px;
+    height: 110px;
+    border-radius: 50%;
+}
 
-      .cta-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #33383a;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    }
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #33383a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
 
-    .fields {
-        max-width: 1000px;
-        margin: auto;
-        text-align: left;
-    }
+.fields {
+    max-width: 1000px;
+    margin: auto;
+    text-align: left;
+}
 
-    .h3 {
-        font-size: 20px;
-        letter-spacing: 5px;
-        color: black;
-    }
+.h3 {
+    font-size: 20px;
+    letter-spacing: 5px;
+    color: black;
+}
 
-    .hero2 {
-        background-image: url('../images/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg');
-        background-size: cover;
-        background-position: center;
-        padding: 100px 0;
-        color: #fff;
-    }
+.hero2 {
+    background-image: url('../images/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    color: #fff;
+}
 
-    .cta-button-delete-profile {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #ff0000;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    }
+.cta-button-delete-profile {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}

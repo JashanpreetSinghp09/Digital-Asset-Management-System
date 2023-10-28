@@ -36,88 +36,69 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="row">
-                    <div class="col-12">
-                        <!-- Page title -->
-                        <br><br>
-                                <h1>My Profile</h1> <br>
-                                <img src="../images/profileimg.png" class="profileimg" alt="profile_logo" />
-                        <!-- Form START -->
-                        <form class="file-upload">
-                            <div class="row mb-5 gx-5">
-                                <!-- Contact detail -->
-                                <div class="col-xxl-8 mb-5 mb-xxl-0">
-                                    <div class="bg-secondary-soft px-4 py-5 rounded">
-                                        <div class="row g-3">
-                                            <h2>User details</h2>
-                                            <br />
-                                            <!-- First Name -->
-                                            <div class="fields">
-                                                <label class="h3" for="newFirstName">First Name*</label>
-                                                <input type="text" id ="newFirstName" class="form-control" placeholder="" aria-label="First name">
-                                            </div>
-                                            <br>
-                                            <!-- Last name -->
-                                            <div class="fields">
-                                                <label class="h3" for="newLastName">Last Name*</label>
-                                                <input type="text" id ="newLastName" class="form-control" placeholder="" aria-label="Last name">
-                                            </div>
-                                            <br>
-                                            <!-- Username/Email -->
-                                            <div class="fields">
-                                                <label class="h3" for="newEmail">E-mail*</label>
-                                                <input type="email" class="form-control" id="newEmail">
-                                            </div>
-                                            <br>
-                                            <button type="button" class="cta-button" onclick="ChangeUserDetails()">Update Details</button>
+        <!-- Page title -->
+        <br><br>
+        <h1>My Profile</h1> <br>
+        <img src="../images/profileimg.png" class="profileimg" alt="profile_logo" />
 
-                                        </div> <!-- Row END -->
-                                    </div>
-                                </div>
-                              
-            
-                          
-            
-                                <!-- change password -->
-                                <div class="col-xxl-6">
-                                    <div class="bg-secondary-soft px-4 py-5 rounded">
-                                        <div class="row g-3">
-                                            <h2>Change Password</h2>
-                                            <br>
-                                            <!-- Old password -->
-                                            <div class="fields">
-                                                <label class="h3" for="oldPassword" class="form-label">Old password*</label>
-                                                <input type="password" class="form-control" id="oldPassword">
-                                            </div>
-                                            <br>
-                                            <!-- New password -->
-                                            <div class="fields">
-                                                <label class="h3" for="newPassword1" class="form-label">New password*</label>
-                                                <input type="password" class="form-control" id="newPassword1">
-                                            </div>
-                                            <br>
-                                            <!-- Confirm password -->
-                                            <div class="fields">
-                                                <label class="h3" for="confirmPassword1" class="form-label">Confirm Password*</label>
-                                                <input type="password" class="form-control" id="confirmPassword1">
-                                            </div>
-                                            <br>
-                                            <button type="button"  class="cta-button" onclick="UpdatePassword()">Update Password</button>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- Row END -->
-                            <!-- button -->
-                            <div class="gap-3 d-md-flex justify-content-md-end text-center update_btn">
-                                <button type="button" class="cta-button-delete-profile">Delete Profile</button>
-                            </div>
-                            <br>
-                        </form> <!-- Form END -->
-                    </div>
+        <!-- Form START -->
+        <form class="file-upload">
+            <!-- Contact detail -->
+            <div class="bg-secondary-soft px-4 py-5 rounded">
+                <h2>User details</h2>
+                <br>
+                <!-- First Name -->
+                <div class="fields">
+                    <label class="h3" for="newFirstName">First Name*</label>
+                    <input type="text" id ="newFirstName" class="form-control" aria-label="First name">
                 </div>
+                <br>
+                <!-- Last name -->
+                <div class="fields">
+                    <label class="h3" for="newLastName">Last Name*</label>
+                    <input type="text" id ="newLastName" class="form-control" aria-label="Last name">
                 </div>
+                <br>
+                <!-- Username/Email -->
+                <div class="fields">
+                    <label class="h3" for="newEmail">E-mail*</label>
+                    <input type="email" class="form-control" id="newEmail">
+                </div>
+                <br>
+                <button type="button" class="cta-button" onclick="ChangeUserDetails()">Update Details</button>
+            </div>
+
+            <!-- change password -->
+            <div class="bg-secondary-soft px-4 py-5 rounded">
+                <h2>Change Password</h2>
+                <br>
+                <!-- Old password -->
+                <div class="fields">
+                    <label class="h3" for="oldPassword" class="form-label">Old Password*</label>
+                    <input type="password" class="form-control" id="oldPassword">
+                </div>
+                <br>
+                <!-- New password -->
+                <div class="fields">
+                    <label class="h3" for="newPassword1" class="form-label">New Password*</label>
+                    <input type="password" class="form-control" id="newPassword1">
+                </div>
+                <br>
+                <!-- Confirm password -->
+                <div class="fields">
+                    <label class="h3" for="confirmPassword1" class="form-label">Confirm Password*</label>
+                    <input type="password" class="form-control" id="confirmPassword1">
+                </div>
+                <br>
+                <button type="button"  class="cta-button" onclick="UpdatePassword()">Update Password</button>
+            </div>
+
+            <!-- button -->
+            <div class="update_btn">
+                <button type="button" class="cta-button-delete-profile">Delete Profile</button>
+            </div>
+            <br>
+        </form> 
     </main>
 
     <footer>
