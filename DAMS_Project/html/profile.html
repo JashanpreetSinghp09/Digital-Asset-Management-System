@@ -40,10 +40,9 @@
             <div class="row">
                     <div class="col-12">
                         <!-- Page title -->
-                        <div class="my-5">
-                            <h3>My Profile</h3>
-                            <hr>
-                        </div>
+                        <br><br>
+                                <h1>My Profile</h1> <br>
+                                <img src="../images/profileimg.png" class="profileimg" alt="profile_logo" />
                         <!-- Form START -->
                         <form class="file-upload">
                             <div class="row mb-5 gx-5">
@@ -51,27 +50,28 @@
                                 <div class="col-xxl-8 mb-5 mb-xxl-0">
                                     <div class="bg-secondary-soft px-4 py-5 rounded">
                                         <div class="row g-3">
-                                            <h4 class="mb-4 mt-0">User details</h4>
+                                            <h2>User details</h2>
+                                            <br />
                                             <!-- First Name -->
-                                            <div class="col-md-6">
-                                                <label class="form-label" for="newFirstName">First Name *</label>
-                                                <input type="text" id ="newFirstName" class="form-control" placeholder="" aria-label="First name" value="Scaralet">
+                                            <div class="fields">
+                                                <label class="h3" for="newFirstName">First Name*</label>
+                                                <input type="text" id ="newFirstName" class="form-control" placeholder="" aria-label="First name">
                                             </div>
+                                            <br>
                                             <!-- Last name -->
-                                            <div class="col-md-6">
-                                                <label class="form-label" for="newLastName">Last Name *</label>
-                                                <input type="text" id ="newLastName" class="form-control" placeholder="" aria-label="Last name" value="Doe">
+                                            <div class="fields">
+                                                <label class="h3" for="newLastName">Last Name*</label>
+                                                <input type="text" id ="newLastName" class="form-control" placeholder="" aria-label="Last name">
                                             </div>
-                                            
+                                            <br>
                                             <!-- Username/Email -->
-                                            <div class="col-md-6">
-                                                <label for="newEmail" class="form-label">Email *</label>
-                                                <input type="email" class="form-control" id="newEmail" value="example@homerealty.com">
+                                            <div class="fields">
+                                                <label class="h3" for="newEmail">E-mail*</label>
+                                                <input type="email" class="form-control" id="newEmail">
                                             </div>
-                                            <div class="gap-3 d-md-flex justify-content-md-end text-center update_btn">
-                                                <button type="button" class="btn btn-danger btn-lg" onclick="ChangeUserDetails()">Update Details</button>
-                                            </div>
-                                            
+                                            <br>
+                                            <button type="button" class="cta-button" onclick="ChangeUserDetails()">Update Details</button>
+
                                         </div> <!-- Row END -->
                                     </div>
                                 </div>
@@ -83,33 +83,37 @@
                                 <div class="col-xxl-6">
                                     <div class="bg-secondary-soft px-4 py-5 rounded">
                                         <div class="row g-3">
-                                            <h4 class="my-4">Change Password</h4>
+                                            <h2>Change Password</h2>
+                                            <br>
                                             <!-- Old password -->
-                                            <div class="col-md-6">
-                                                <label for="oldPassword" class="form-label">Old password *</label>
+                                            <div class="fields">
+                                                <label class="h3" for="oldPassword" class="form-label">Old password*</label>
                                                 <input type="password" class="form-control" id="oldPassword">
                                             </div>
+                                            <br>
                                             <!-- New password -->
-                                            <div class="col-md-6">
-                                                <label for="newPassword1" class="form-label">New password *</label>
+                                            <div class="fields">
+                                                <label class="h3" for="newPassword1" class="form-label">New password*</label>
                                                 <input type="password" class="form-control" id="newPassword1">
                                             </div>
+                                            <br>
                                             <!-- Confirm password -->
-                                            <div class="col-md-12">
-                                                <label for="confirmPassword1" class="form-label">Confirm Password *</label>
+                                            <div class="fields">
+                                                <label class="h3" for="confirmPassword1" class="form-label">Confirm Password*</label>
                                                 <input type="password" class="form-control" id="confirmPassword1">
                                             </div>
-                                            <div class="gap-3 d-md-flex justify-content-md-end text-center update_btn">
-                                                <button type="button" class="btn btn-danger btn-lg" onclick="UpdatePassword()">Update Password</button>
-                                            </div>
+                                            <br>
+                                            <button type="button"  class="cta-button" onclick="UpdatePassword()">Update Password</button>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div> <!-- Row END -->
                             <!-- button -->
                             <div class="gap-3 d-md-flex justify-content-md-end text-center update_btn">
-                                <button type="button" class="btn btn-danger btn-lg">Delete Profile</button>
+                                <button type="button" class="cta-button-delete-profile">Delete Profile</button>
                             </div>
+                            <br>
                         </form> <!-- Form END -->
                     </div>
                 </div>

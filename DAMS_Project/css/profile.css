@@ -1,7 +1,9 @@
-body{margin-top:20px;
-    color: #9b9ca1;
-    }
-    .bg-secondary-soft {
+body {
+    text-align: center;
+    background-image: url('../images/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg');
+}
+
+.bg-secondary-soft {
         background-color: rgba(208, 212, 217, 0.1) !important;
     }
     .rounded {
@@ -63,4 +65,63 @@ body{margin-top:20px;
         transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    }
+
+    h1, h2, .black-spaced {
+        letter-spacing: 5px;
+        color: black;
+    }
+
+    .main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .profileimg {
+        width: 140px;
+        height: 110px;
+        border-radius: 50%;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #33383a;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    .fields {
+        max-width: 1000px;
+        margin: auto;
+        text-align: left;
+    }
+
+    .h3 {
+        font-size: 20px;
+        letter-spacing: 5px;
+        color: black;
+    }
+
+    .hero2 {
+        background-image: url('../images/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg');
+        background-size: cover;
+        background-position: center;
+        padding: 100px 0;
+        color: #fff;
+    }
+
+    .cta-button-delete-profile {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0000;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     }
