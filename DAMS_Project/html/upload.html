@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include your existing meta tags and stylesheets here -->
+
+    <title>Upload</title>
+    <!-- <link rel="stylesheet" href="../css/upload.css"> -->
+    <link rel="stylesheet" href="../css/homeStyle.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+    <header>
+        <!-- Include your header content as shown in your original HTML -->
+        <nav>
+            <a href="home.html" class="nav-hover">
+                <img src="../images/dams_logo.png" class="logo" alt="logo">
+            </a>
+            <ul class="nav-links">
+                <li class="nav-hover"><a href="home.html">Home</a></li>
+                <li class="nav-hover"><a href="assets.html">Assets</a></li>
+                <li class="nav-hover"><a href="#">Categories</a></li>
+                <li class="nav-hover"><a href="upload.html">Upload</a></li>
+                <a href="profile.html">
+                    <img src="../images/profile.png" class="profile_logo nav-hover" alt="profile_logo" />
+                </a>
+            </ul> 
+        </nav>
+    </header>
+
+    <main>
+        <!-- <section class="hero">
+            <h1>Upload</h1>
+            <form id="upload-form">
+                <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .pdf" required>
+                <input type="text" class="form-control" id="tags-input" placeholder="Add tags (comma-separated)">
+                <textarea id="description-input" class="form-control" placeholder="Brief description"></textarea>
+                <button type="button"  id="upload-button">Up load</button>
+            </form>
+        </section> -->
+
+        <form class="file-upload">
+            <!-- Contact detail -->
+            <div class="bg-secondary-soft px-4 py-5 rounded">
+                <h1>Upload</h1>
+                <br>
+                <!-- First Name -->
+                <div class="fields">
+                    <label class="h3" for="file-input"> Upload Images/Videos/GIFs/Audio <br>(.jpg, .jpeg, .png, .pdf, .mp3, .mp4)</label> <br> </br>
+                    <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .pdf .mp3 .mp4" required>
+                </div>
+                <br>
+                <!-- Last name -->
+                <div class="fields">
+                    <label class="h3" for="tags-input">Tags</label>
+                    <input type="text" class="form-control" id="tags-input" placeholder="Add tags (comma-separated)" required>
+                </div>
+                <br>
+                <!-- Username/Email -->
+                <div class="fields">
+                    <label class="h3" for="description-input">Description</label>
+                    <textarea id="description-input" class="form-control" placeholder="Brief description" required></textarea>
+                </div>
+                <br>
+                <button type="button" class="cta-button" id="upload-button" onclick="uploadFile()">Upload</button>
+            </div>
+        </form>  
+        <!-- Add more sections for your content here -->
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Digital Asset Management System</p>
+    </footer>
+    <script src="../javascript/auth.js"></script>
+    <script src="../javascript/upload.js"></script>
+</body>
+</html>
