@@ -7,6 +7,9 @@
     <!-- <link rel="stylesheet" href="../css/upload.css"> -->
     <link rel="stylesheet" href="../css/homeStyle.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
 </head>
 <body>
     <header>
@@ -46,7 +49,7 @@
                 <!-- First Name -->
                 <div class="fields">
                     <label class="h3" for="file-input"> Upload Images/Videos/GIFs/Audio <br>(.jpg, .jpeg, .png, .pdf, .mp3, .mp4)</label> <br> </br>
-                    <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .pdf .mp3 .mp4" required>
+                    <input name="file" type="file" id="file-input" accept=".jpg, .jpeg, .png, .pdf .mp3 .mp4" required>
                 </div>
                 <br>
                 <!-- Last name -->
@@ -71,6 +74,5 @@
         <p>&copy; 2023 Digital Asset Management System</p>
     </footer>
     <script src="../javascript/auth.js"></script>
-    <script src="../javascript/upload.js"></script>
 </body>
 </html>
