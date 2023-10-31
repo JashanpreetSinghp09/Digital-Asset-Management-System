@@ -117,6 +117,26 @@ app.post('/changeUserDetails', async (req, res) => {
   }
 });
 
+app.post('/deleteDetails', async (req, res) => {
+  const { firebaseUid } = req.body;
+
+  try {
+    // Use Firebase Admin SDK to delete the user by UID
+    await admin.auth().deleteUser(firebaseUid);
+
+    // Delete the user's details from the MongoDB database
+    const deletedUser = await User.findOneAndDelete({ firebaseUid: firebaseUid });
+
+    if (deletedUser) {
+      res.json({ success: true, message: 'User details deleted' });
+    } else {
+      res.json({ success: false, error: 'User not found' });
+    }
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+});
+
 //Used for fetching email from server
 app.get('/getUid', async (req, res) => {
   const email = req.query.email; // You can pass the email as a query parameter
@@ -141,8 +161,6 @@ app.listen(8000, () => {
   console.error(error);
 }
 }
-
-
 
 // Start the server
 startServer();

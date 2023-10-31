@@ -206,3 +206,35 @@ function UpdatePassword() {
     }
   });
 }
+
+function DeleteUser(){
+
+  const user = firebase.auth().currentUser;
+
+  const userData = {
+    firebaseUid: user.uid
+  };
+
+  // Make a POST request to the server to delete the user details
+  fetch('/deleteDetails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // User details were successfully deleted
+        alert('User details deleted!');
+        window.location.href = "index.html";
+      } else {
+        // Handle the error
+        console.error('Error:', data.error);
+      }
+    })
+    .catch((error) => {
+      console.error('Request error:', error);
+    });
+}
