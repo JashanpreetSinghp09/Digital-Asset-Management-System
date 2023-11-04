@@ -252,23 +252,23 @@ async function uploadFile() {
   formData.append('description', descriptionInput.value);
   formData.append('firebaseUid', firebaseUid);
   formData.append('file', fileInput.files[0]);
-  console.log(formData);
 
   fetch('/upload', {
     method: 'POST',
     body: formData,
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error('File upload failed');
-      }
-    })
-    .then(data => {
-      console.log(data.message);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // File uploaded successfully
+      window.alert("File Upload Success");
+    } else {
+      // File upload failed
+      window.alert("File Upload Failed: " + data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    window.alert('File upload error: ' + error.message);
+  });
 }

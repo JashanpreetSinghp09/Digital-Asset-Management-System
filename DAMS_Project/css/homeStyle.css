@@ -46,6 +46,45 @@ nav {
     padding: 0 20px;
 }
 
+/* Style for the categories dropdown */
+.categories-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #33383a; /* Match the header background color */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+    z-index: 1;
+    border-radius: 10px; /* Rounded corners */
+    width: 160px; /* Adjust the width as needed */
+}
+
+.categories-link:hover .categories-dropdown {
+    display: block;
+    transform: translateY(10px); /* Add a subtle dropdown effect */
+}
+
+.categories-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.categories-dropdown ul li {
+    padding: 10px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    border-radius: 5px; /* Rounded corners for each item */
+}
+
+.categories-dropdown ul li:last-child {
+    border-bottom: none; /* Remove border from the last item */
+}
+
+.categories-dropdown ul li:hover {
+    background-color: teal; /* Change the background color on hover */
+    color: #fff; /* Text color on hover */
+    border-radius: 5px; /* Rounded corners on hover */
+}
+
+
 .logo {
     width: 120px;
 }

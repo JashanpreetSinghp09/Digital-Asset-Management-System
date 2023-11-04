@@ -184,8 +184,15 @@ app.get('/getUid', async (req, res) => {
   }
 });
 
-app.post('/upload', upload.single('file'), (req, res) => {
-
+app.post('/upload', upload.single('file'), async (req, res) => {
+  
+  if (!req.file) {
+    // File with the same name or description already exists
+    res.status(400).json({ success: false, message: 'upload failed!' });
+  } else {
+    // File doesn't exist, so it's a successful upload
+    res.json({ success: true, message: 'File uploaded successfully' });
+  }
   
 });
 
