@@ -84,6 +84,35 @@ nav {
     border-radius: 5px; /* Rounded corners on hover */
 }
 
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 300px; /* Adjust the width as needed */
+    margin: 20px auto; /* Adjust the margin for placement */
+}
+
+#search-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #d5feff;
+    color: #fff;
+}
+
+#search-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+#search-button img {
+    width: 20px; /* Adjust the size of the search icon */
+    height: 20px;
+}
 
 .logo {
     width: 120px;
