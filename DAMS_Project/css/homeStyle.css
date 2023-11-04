@@ -98,6 +98,25 @@ nav {
     margin-bottom: 30px;
 }
 
+.hero2 {
+    background-image: url('../images/pexels-pixabay-268415.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 100px 0;
+    color: #fff;
+}
+
+.hero2 h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero2 p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
 .cta-button {
     display: inline-block;
     padding: 10px 20px;
@@ -115,7 +134,14 @@ nav {
 }
 
 /* Style the footer */
-footer {
+.footer {
+    background-color: #33383a;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.black-bar {
     background-color: #33383a;
     color: #fff;
     text-align: center;
