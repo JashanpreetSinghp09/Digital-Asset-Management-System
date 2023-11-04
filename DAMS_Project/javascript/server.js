@@ -185,35 +185,7 @@ app.get('/getUid', async (req, res) => {
 
 app.post('/upload', upload.single('file'), (req, res) => {
 
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
   
-  const file = req.file;
-
-  // Access additional data from the request body
-  const tags = req.body.tags;
-  const description = req.body.description;
-
-  const writeStream = gfs.createWriteStream({
-    filename: file.originalname,
-    metadata: {
-      tags: tags,
-      description: description,
-    },
-  });
-
-  // Pipe the file data to the write stream
-  file.pipe(writeStream);
-
-  // Respond with a success message or handle errors
-  writeStream.on('close', () => {
-    res.json({ message: 'File uploaded successfully' });
-  });
-  writeStream.on('error', (error) => {
-    console.error('File upload error:', error);
-    res.status(500).json({ error: 'File upload failed' });
-  });
 });
 
 //Pointing the server.js to index.html
