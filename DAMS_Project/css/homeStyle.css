@@ -5,6 +5,10 @@ body, h1, h2, p {
     font-family: 'Exo 2', sans-serif;
 }
 
+input::placeholder {
+    font-family: 'Exo 2', sans-serif;
+}
+
 h1, .black-spaced {
     letter-spacing: 5px;
     color: black;
