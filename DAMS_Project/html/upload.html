@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Include your existing meta tags and stylesheets here -->
-
     <title>Upload</title>
-    <!-- <link rel="stylesheet" href="../css/upload.css"> -->
     <link rel="stylesheet" href="../css/homeStyle.css">
     <link rel="stylesheet" href="../css/profile.css">
     <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
@@ -13,7 +10,6 @@
 </head>
 <body>
     <header>
-        <!-- Include your header content as shown in your original HTML -->
         <nav>
             <a href="home.html" class="nav-hover">
                 <img src="../images/dams_logo.png" class="logo" alt="logo">
@@ -31,17 +27,8 @@
     </header>
 
     <main>
-        <!-- <section class="hero">
-            <h1>Upload</h1>
-            <form id="upload-form">
-                <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .pdf" required>
-                <input type="text" class="form-control" id="tags-input" placeholder="Add tags (comma-separated)">
-                <textarea id="description-input" class="form-control" placeholder="Brief description"></textarea>
-                <button type="button"  id="upload-button">Up load</button>
-            </form>
-        </section> -->
 
-        <form class="file-upload">
+        <form class="file-upload" enctype="multipart/form-data">
             <!-- Contact detail -->
             <div class="bg-secondary-soft px-4 py-5 rounded">
                 <h1>Upload</h1>
@@ -49,7 +36,8 @@
                 <!-- First Name -->
                 <div class="fields">
                     <label class="h3" for="file-input"> Upload Images/Videos/GIFs/Audio <br>(.jpg, .jpeg, .png, .pdf, .mp3, .mp4)</label> <br> </br>
-                    <input name="file" type="file" id="file-input" accept=".jpg, .jpeg, .png, .pdf .mp3 .mp4" required>
+                    <input type="file" name="file" id="file-input" accept=".jpg, .jpeg, .png, .pdf, .mp3, .mp4" required>
+
                 </div>
                 <br>
                 <!-- Last name -->

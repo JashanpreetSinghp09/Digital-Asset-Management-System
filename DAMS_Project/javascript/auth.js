@@ -238,59 +238,33 @@ function DeleteUser(){
       console.error('Request error:', error);
     });
 }
-
-
-function uploadFile() {
+async function uploadFile() {
   const fileInput = document.getElementById('file-input');
   const tagsInput = document.getElementById('tags-input');
   const descriptionInput = document.getElementById('description-input');
-  const uploadButton = document.getElementById('upload-button');
-
-  const file = fileInput.files[0];
-  const tags = tagsInput.value.split(",").map(tag => tag.trim());
-  const description = descriptionInput.value;
-
-  if (!file) {
-      alert('Please select a file to upload.');
-      return;
-  }
-
-  if (tags.length === 0) {
-      alert('Please add at least one tag.');
-      return;
-  }
+  
 
   const formData = new FormData();
-  formData.append('file', file);
-  formData.append('tags', JSON.stringify(tags));
-  formData.append('description', description);
-
-  uploadButton.disabled = true;
+  formData.append('tags', tagsInput.value);
+  formData.append('description', descriptionInput.value);
+  formData.append('file', fileInput.files[0]);
+  console.log(formData);
 
   fetch('/upload', {
-      method: 'POST',
-      body: formData,
+    method: 'POST',
+    body: formData,
   })
-      .then(response => {
-          if (response.ok) {
-              return response.json();
-          } else {
-              throw new Error('Network response was not ok');
-          }
-      })
-      .then(data => {
-          if (data.success) {
-              alert('File uploaded successfully!');
-              // Optionally, redirect to another page or perform additional actions.
-          } else {
-              alert('Error: ' + data.error);
-          }
-      })
-      .catch(error => {
-          console.error('Fetch error:', error);
-          alert('Fetch error: ' + error.message);
-      })
-      .finally(() => {
-          uploadButton.disabled = false;
-      });
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('File upload failed');
+      }
+    })
+    .then(data => {
+      console.log(data.message);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }

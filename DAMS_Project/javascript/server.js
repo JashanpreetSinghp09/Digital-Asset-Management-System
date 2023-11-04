@@ -2,48 +2,65 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Grid = require('gridfs-stream');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const {GridFsStorage} = require('multer-gridfs-storage');
 const path = require("path");
 const admin = require("firebase-admin");
 const serviceAccount = require("./dams-3565b-firebase-adminsdk-zztmh-23970a084a.json");
+const { User} = require('./db') //Importing user model from db.js
 
 const app = express();
 
 const uri = "mongodb+srv://dams-3565b:dams-3565b@dams.lp0lkjv.mongodb.net/?retryWrites=true&w=majority";
 
+async function initializeFirebase(){
+
+  try {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      databaseURL: "https://dams-3565b-default-rtdb.firebaseio.com"
+    });
+    console.log("Firebase initialized successfully");
+  } catch (error) {
+    console.error("Error initializing Firebase:", error);
+  }
+}
+
 // Use async/await for server initialization
 async function startServer() {
   try {
-    await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(uri);
     console.log("Connected to MongoDB");
+    mongoose.set('strictQuery', false);
 
     const conn = mongoose.connection;
-    Grid.mongo = mongoose.mongo;
+    // Init gfs
     let gfs;
     
+
     conn.once('open', () => {
-        gfs = Grid(conn.db);
-        gfs.collection('uploads'); // Set the collection name
+      gfs = Grid(conn.db, mongoose.mongo);
+      gfs.collection('uploads');
     });
 
-    //Importing user model from db.js
-    const { User, Asset } = require('./db'); // Import both models from db.js
-    // const Asset = dbase.Asset;
-    
+    const storage = new GridFsStorage({
+      url: uri ,
+      options: { useNewUrlParser: true, useUnifiedTopology: true },
+      file: (req, file) => {
+        return {
+          bucketName: 'uploads', // Set the name of the bucket
+          filename: file.originalname,
+          metadata: {
+            tags: req.body.tags,
+            description: req.body.description,
+          },
+        };
+      },
+    });
 
+    const upload = multer({ storage });
+  
     
-    
-    try {
-      admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://dams-3565b-default-rtdb.firebaseio.com"
-      });
-      console.log("Firebase initialized successfully");
-    } catch (error) {
-      console.error("Error initializing Firebase:", error);
-    }
 
     // Place this inside the 'startServer' function to ensure the database and server are connected
     const db = admin.firestore();
@@ -51,6 +68,7 @@ async function startServer() {
 
 //Middleware for parsing JSON data
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Serve static files
@@ -165,81 +183,38 @@ app.get('/getUid', async (req, res) => {
   }
 });
 
+app.post('/upload', upload.single('file'), (req, res) => {
 
-// const multer = require('multer');
-
-
-// Set up a Multer storage engine to handle file uploads
-// const storage = multer.diskStorage({
-//     destination: 'upload_files/', // Directory where uploaded files will be stored
-//     filename: function (req, file, callback) {
-//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//         callback(null, file.fieldname + '-' + uniqueSuffix);
-//     }
-// });
-
-
-// const upload = multer({ storage: storage });
-
-// Route to handle file uploads
-// app.post('/upload', upload.single('file'), async (req, res) => {
-//   console.log(req.body, file.originalname, file.tags, file.description);
-//     try {
-//         const { file, tags, description } = req.body;
-//         const filePath = req.file.path; // Path to the uploaded file
-
-//         // test
-//         console.log(file.originalname, tags, description);
-//       //
-
-
-//         // Create a new Asset document and save it to the database
-//         const asset = new Asset({
-//             title: file.originalname,
-//             fileType: 'image', // You can determine the file type based on the uploaded file
-//             tags: JSON.parse(tags),
-//             description,
-//             filePath,
-//         });
-
-//         await asset.save();
-
-//         res.json({ success: true });
-//     } catch (error) {
-//         res.status(500).json({ success: false, error: error.message });
-//     }
-// });
-
-
-
-// Handle file uploads
-app.post('/upload', (req, res) => {
-  const { file, tags, description } = req.body;
-
-  if (!file || !tags || !description) {
-      return res.status(400).json({ success: false, error: 'Missing file, tags, or description' });
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
   }
+  
+  const file = req.file;
+
+  // Access additional data from the request body
+  const tags = req.body.tags;
+  const description = req.body.description;
 
   const writeStream = gfs.createWriteStream({
-      filename: file.originalname,
-      metadata: {
-          tags: JSON.parse(tags),
-          description: description,
-      },
+    filename: file.originalname,
+    metadata: {
+      tags: tags,
+      description: description,
+    },
   });
 
-  writeStream.on('close', (file) => {
-      res.json({ success: true });
-  });
+  // Pipe the file data to the write stream
+  file.pipe(writeStream);
 
+  // Respond with a success message or handle errors
+  writeStream.on('close', () => {
+    res.json({ message: 'File uploaded successfully' });
+  });
   writeStream.on('error', (error) => {
-      res.status(500).json({ success: false, error: error.message });
+    console.error('File upload error:', error);
+    res.status(500).json({ error: 'File upload failed' });
   });
-
-  writeStream.write(file.data);
-  writeStream.end();
 });
-
 
 //Pointing the server.js to index.html
 app.get('/', (req, res) => {
@@ -255,4 +230,4 @@ app.listen(8000, () => {
 }
 
 // Start the server
-startServer();
+initializeFirebase().then(() => startServer());
