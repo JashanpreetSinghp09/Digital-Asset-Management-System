@@ -242,11 +242,15 @@ async function uploadFile() {
   const fileInput = document.getElementById('file-input');
   const tagsInput = document.getElementById('tags-input');
   const descriptionInput = document.getElementById('description-input');
+
+  const user = firebase.auth().currentUser;
+  const firebaseUid = user.uid;
   
 
   const formData = new FormData();
   formData.append('tags', tagsInput.value);
   formData.append('description', descriptionInput.value);
+  formData.append('firebaseUid', firebaseUid);
   formData.append('file', fileInput.files[0]);
   console.log(formData);
 

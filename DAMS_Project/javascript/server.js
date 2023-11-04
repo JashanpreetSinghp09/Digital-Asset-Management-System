@@ -51,6 +51,7 @@ async function startServer() {
           bucketName: 'uploads', // Set the name of the bucket
           filename: file.originalname,
           metadata: {
+            firebaseUid: req.body.firebaseUid,
             tags: req.body.tags,
             description: req.body.description,
           },
