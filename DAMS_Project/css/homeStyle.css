@@ -118,6 +118,11 @@ nav {
     width: 120px;
 }
 
+.homepage-pics {
+    width: 250px;
+    box-shadow: 0 0 30px rgb(0, 0, 0);
+}
+
 .profile_logo {
     width: 40px;
 }
@@ -162,25 +167,6 @@ nav {
 }
 
 .hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.hero2 {
-    background-image: url('../images/pexels-pixabay-268415.jpg');
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    padding: 100px 0;
-    color: #fff;
-}
-
-.hero2 h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.hero2 p {
     font-size: 18px;
     margin-bottom: 30px;
 }
