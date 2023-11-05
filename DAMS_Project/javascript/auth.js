@@ -272,3 +272,39 @@ async function uploadFile() {
     window.alert('File upload error: ' + error.message);
   });
 }
+
+// Function to fetch and display user's assets
+async function displayUserAssets() {
+
+  const firebaseUid = localStorage.getItem('firebaseUid');
+ 
+   // Fetch the user's assets from the server
+   fetch(`/get-user-assets?firebaseUid=${firebaseUid}`)
+       .then((response) => response.json())
+       .then((data) => {
+           if (data.success) {
+               const assetsContainer = document.querySelector('.assets');
+ 
+               // Loop through the user's assets and generate HTML for each
+               data.assets.forEach((asset) => {
+                   const assetElement = document.createElement('div');
+                   assetElement.classList.add('asset-item');
+ 
+                   // You can customize this part to display the asset details
+                   assetElement.innerHTML = `
+                       <a href="${asset.downloadURL}" target="_blank">
+                           <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+                           <p>${asset.filename}</p>
+                       </a>
+                   `;
+ 
+                   assetsContainer.appendChild(assetElement);
+               });
+           } else {
+               console.error('Error fetching user assets:', data.error);
+           }
+       })
+       .catch((error) => {
+           console.error('Fetch error:', error);
+       });
+ }

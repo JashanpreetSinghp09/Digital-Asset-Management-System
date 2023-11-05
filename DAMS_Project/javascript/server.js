@@ -174,7 +174,7 @@ app.post('/deleteDetails', async (req, res) => {
 
 //Used for fetching email from server
 app.get('/getUid', async (req, res) => {
-  const email = req.query.email; // You can pass the email as a query parameter
+  const email = req.query.email; 
   const user = await User.findOne({ email: email }); // Query MongoDB for the user by email
 
   if (user) {
@@ -184,17 +184,23 @@ app.get('/getUid', async (req, res) => {
   }
 });
 
-app.post('/upload', upload.single('file'), async (req, res) => {
-  
-  if (!req.file) {
-    // File with the same name or description already exists
-    res.status(400).json({ success: false, message: 'upload failed!' });
-  } else {
-    // File doesn't exist, so it's a successful upload
-    res.json({ success: true, message: 'File uploaded successfully' });
-  }
+app.post('/upload', upload.single('file'), (req, res) => {
+
   
 });
+
+
+/////////////  get user assets ///////////////////
+app.get('/get-user-assets', async (req, res) => {
+  const { firebaseUid } = req.query; 
+
+  // Query your database to retrieve the user's assets
+  const userAssets = await gfs.files.find({ firebaseUid }); // Replace YourAssetModel with your actual model
+
+  res.json({ success: true, assets: userAssets });
+});
+
+////////////////////////////////
 
 //Pointing the server.js to index.html
 app.get('/', (req, res) => {
