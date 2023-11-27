@@ -277,56 +277,55 @@ async function uploadFile() {
   });
 }
 
-// Function to fetch and display user's assets
-async function displayUserAssets() {
+// Helper function to categorize assets based on fileType
+function categorizeAssets(assets) {
+  const categorizedAssets = {
+    Images: [],
+    Audio: [],
+    Video: [],
+    Docs:[],
+    Other: [],
+  };
 
-  const firebaseUid = localStorage.getItem('firebaseUid');
- 
-   // Fetch the user's assets from the server
-   fetch(`/get-user-assets?firebaseUid=${firebaseUid}`)
-       .then((response) => response.json())
-       .then((data) => {
-           if (data.success) {
-            console.log(data.assets);
-               const assetsContainer = document.querySelector('.assets');
- 
-               // Loop through the user's assets and generate HTML for each
-               data.assets.forEach((asset) => {
-                   const assetElement = document.createElement('div');
-                   assetElement.classList.add('asset-item');
- 
-                   // You can customize this part to display the asset details
-                   assetElement.innerHTML = `
-                       <a href="${asset.downloadURL}" target="_blank">
-                           <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                           <p>${asset.filename}</p>
-                       </a>
-                   `;
- 
-                   assetsContainer.appendChild(assetElement);
-               });
-           } else {
-               console.error('Error fetching user assets:', data.error);
-           }
-       })
-       .catch((error) => {
-           console.error('Fetch error:', error);
-       });
+  assets.forEach((asset) => {
+    const fileType = getFileType(asset.filename);
+    switch (fileType) {
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'pdf':
+      case 'gif':
+        categorizedAssets.Images.push(asset);
+        break;
+      case 'mp3':
+        categorizedAssets.Audio.push(asset);
+        break;
+      case 'mp4':
+        categorizedAssets.Video.push(asset);
+        break;
+      case 'pdf':
+        categorizedAssets.Docs.push(asset);
+        break;
+      default:
+        categorizedAssets.Other.push(asset);
+        break;
+    }
+  });
+
+  return categorizedAssets;
 }
 
-// Function to filter user's assets based on search query
-function filterUserAssets() {
-  const searchInput = document.getElementById('search-input');
-  const searchQuery = searchInput.value.trim().toLowerCase();
+// Helper function to get the fileType from the filename
+function getFileType(filename) {
+  const extension = filename.split('.').pop();
+  return extension.toLowerCase();
+}
 
-  // If the search query is empty, just display all assets
-  if (searchQuery === '') {
-    displayUserAssets();
-    return;
-  }
-
-  // Otherwise, fetch the assets and filter them based on the search query
+// Function to fetch and display user's assets with categories
+async function displayUserAssets() {
   const firebaseUid = localStorage.getItem('firebaseUid');
+
+  // Fetch the user's assets from the server
   fetch(`/get-user-assets?firebaseUid=${firebaseUid}`)
     .then((response) => response.json())
     .then((data) => {
@@ -336,26 +335,39 @@ function filterUserAssets() {
         // Clear the current contents of the assets div
         assetsContainer.innerHTML = '';
 
-        // Filter assets based on the search query
-        const filteredAssets = data.assets.filter((asset) =>
-          asset.filename.toLowerCase().includes(searchQuery)
-        );
+        // Organize assets into categories
+        const categorizedAssets = categorizeAssets(data.assets);
 
-        // Loop through the filtered assets and generate HTML for each
-        filteredAssets.forEach((asset) => {
-          const assetElement = document.createElement('div');
-          assetElement.classList.add('asset-item');
+        // Loop through the categories and generate HTML for each
+        for (const [category, assets] of Object.entries(categorizedAssets)) {
+          // Create a category container
+          const categoryContainer = document.createElement('div');
+          categoryContainer.classList.add('asset-category');
 
-          // Customize this part to display the asset details
-          assetElement.innerHTML = `
-            <a href="${asset.downloadURL}" target="_blank">
-              <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-              <p>${asset.filename}</p>
-            </a>
-          `;
+          // Create a heading for the category
+          const categoryHeading = document.createElement('h2');
+          categoryHeading.textContent = category;
+          categoryContainer.appendChild(categoryHeading);
 
-          assetsContainer.appendChild(assetElement);
-        });
+          // Loop through the assets in the category and generate HTML for each
+          assets.forEach((asset) => {
+            const assetElement = document.createElement('div');
+            assetElement.classList.add('asset-item');
+
+            // Customize this part to display the asset details
+            assetElement.innerHTML = `
+              <a href="${asset.downloadURL}" target="_blank">
+                <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+                <p>${asset.filename}</p>
+              </a>
+            `;
+
+            categoryContainer.appendChild(assetElement);
+          });
+
+          // Append the category container to the assets container
+          assetsContainer.appendChild(categoryContainer);
+        }
       } else {
         console.error('Error fetching user assets:', data.error);
       }
@@ -365,7 +377,7 @@ function filterUserAssets() {
     });
 }
 
-// Function to filter user's assets based on search query
+// Function to filter user's assets based on search query with categories
 function filterUserAssets() {
   const searchInput = document.getElementById('search-input');
   const searchQuery = searchInput.value.trim().toLowerCase();
@@ -376,8 +388,9 @@ function filterUserAssets() {
     return;
   }
 
-  // Otherwise, fetch the assets and filter them based on the search query
   const firebaseUid = localStorage.getItem('firebaseUid');
+
+  // Fetch the assets for filtering based on the search query
   fetch(`/get-user-assets?firebaseUid=${firebaseUid}`)
     .then((response) => response.json())
     .then((data) => {
@@ -392,21 +405,39 @@ function filterUserAssets() {
           asset.filename.toLowerCase().includes(searchQuery)
         );
 
-        // Loop through the filtered assets and generate HTML for each
-        filteredAssets.forEach((asset) => {
-          const assetElement = document.createElement('div');
-          assetElement.classList.add('asset-item');
+        // Organize filtered assets into categories
+        const categorizedAssets = categorizeAssets(filteredAssets);
 
-          // Customize this part to display the asset details
-          assetElement.innerHTML = `
-            <a href="${asset.downloadURL}" target="_blank">
-              <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-              <p>${asset.filename}</p>
-            </a>
-          `;
+        // Loop through the categories and generate HTML for each
+        for (const [category, assets] of Object.entries(categorizedAssets)) {
+          // Create a category container
+          const categoryContainer = document.createElement('div');
+          categoryContainer.classList.add('asset-category');
 
-          assetsContainer.appendChild(assetElement);
-        });
+          // Create a heading for the category
+          const categoryHeading = document.createElement('h2');
+          categoryHeading.textContent = category;
+          categoryContainer.appendChild(categoryHeading);
+
+          // Loop through the assets in the category and generate HTML for each
+          assets.forEach((asset) => {
+            const assetElement = document.createElement('div');
+            assetElement.classList.add('asset-item');
+
+            // Customize this part to display the asset details
+            assetElement.innerHTML = `
+              <a href="${asset.downloadURL}" target="_blank">
+                <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+                <p>${asset.filename}</p>
+              </a>
+            `;
+
+            categoryContainer.appendChild(assetElement);
+          });
+
+          // Append the category container to the assets container
+          assetsContainer.appendChild(categoryContainer);
+        }
       } else {
         console.error('Error fetching user assets:', data.error);
       }
