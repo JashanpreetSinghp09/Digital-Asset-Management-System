@@ -485,8 +485,7 @@ function filterUserAssets() {
 }
 
 // Function to fetch and display public assets with categories
-async function displayPublicAssets() {
-
+async function displayPublicAssets(category = null) {
   // Fetch the user's assets from the server
   fetch(`/get-files`)
     .then((response) => response.json())
@@ -500,35 +499,67 @@ async function displayPublicAssets() {
         // Organize assets into categories
         const categorizedAssets = categorizeAssets(data.assets);
 
-        // Loop through the categories and generate HTML for each
-        for (const [category, assets] of Object.entries(categorizedAssets)) {
-          // Create a category container
-          const categoryContainer = document.createElement('div');
-          categoryContainer.classList.add('asset-category');
+        if (category) {
+          // Display only the specified category
+          const assetsInCategory = categorizedAssets[category];
+          if (assetsInCategory) {
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('asset-category');
 
-          // Create a heading for the category
-          const categoryHeading = document.createElement('h2');
-          categoryHeading.textContent = category;
-          categoryContainer.appendChild(categoryHeading);
+            // Create a heading for the category
+            const categoryHeading = document.createElement('h2');
+            categoryHeading.textContent = category;
+            categoryContainer.appendChild(categoryHeading);
 
-          // Loop through the assets in the category and generate HTML for each
-          assets.forEach((asset) => {
-            const assetElement = document.createElement('div');
-            assetElement.classList.add('asset-item');
+            // Loop through the assets in the category and generate HTML for each
+            assetsInCategory.forEach((asset) => {
+              const assetElement = document.createElement('div');
+              assetElement.classList.add('asset-item');
 
-            // Customize this part to display the asset details
-            assetElement.innerHTML = `
-              <a href="${asset.downloadURL}" target="_blank">
-                <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                <p>${asset.filename}</p>
-              </a>
-            `;
+              // Customize this part to display the asset details
+              assetElement.innerHTML = `
+                <a href="${asset.downloadURL}" target="_blank">
+                  <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+                  <p>${asset.filename}</p>
+                </a>
+              `;
 
-            categoryContainer.appendChild(assetElement);
-          });
+              categoryContainer.appendChild(assetElement);
+            });
 
-          // Append the category container to the assets container
-          assetsContainer.appendChild(categoryContainer);
+            // Append the category container to the assets container
+            assetsContainer.appendChild(categoryContainer);
+          }
+        } else {
+          // Loop through all categories and generate HTML for each
+          for (const [category, assets] of Object.entries(categorizedAssets)) {
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('asset-category');
+
+            // Create a heading for the category
+            const categoryHeading = document.createElement('h2');
+            categoryHeading.textContent = category;
+            categoryContainer.appendChild(categoryHeading);
+
+            // Loop through the assets in the category and generate HTML for each
+            assets.forEach((asset) => {
+              const assetElement = document.createElement('div');
+              assetElement.classList.add('asset-item');
+
+              // Customize this part to display the asset details
+              assetElement.innerHTML = `
+                <a href="${asset.downloadURL}" target="_blank">
+                  <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+                  <p>${asset.filename}</p>
+                </a>
+              `;
+
+              categoryContainer.appendChild(assetElement);
+            });
+
+            // Append the category container to the assets container
+            assetsContainer.appendChild(categoryContainer);
+          }
         }
       } else {
         console.error('Error fetching user assets:', data.error);
@@ -540,13 +571,13 @@ async function displayPublicAssets() {
 }
 
 // Function to filter user's assets based on search query with categories
-function filterPublicAssets() {
+function filterPublicAssets(category = null) {
   const searchInput = document.getElementById('search-input');
   const searchQuery = searchInput.value.trim().toLowerCase();
 
   // If the search query is empty, just display all assets
   if (searchQuery === '') {
-    displayPublicAssets();
+    displayPublicAssets(category);
     return;
   }
 
@@ -568,35 +599,67 @@ function filterPublicAssets() {
         // Organize filtered assets into categories
         const categorizedAssets = categorizeAssets(filteredAssets);
 
-        // Loop through the categories and generate HTML for each
-        for (const [category, assets] of Object.entries(categorizedAssets)) {
-          // Create a category container
-          const categoryContainer = document.createElement('div');
-          categoryContainer.classList.add('asset-category');
+        if (category) {
+          // Display only the specified category
+          const assetsInCategory = categorizedAssets[category];
+          if (assetsInCategory) {
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('asset-category');
 
-          // Create a heading for the category
-          const categoryHeading = document.createElement('h2');
-          categoryHeading.textContent = category;
-          categoryContainer.appendChild(categoryHeading);
+            // Create a heading for the category
+            const categoryHeading = document.createElement('h2');
+            categoryHeading.textContent = category;
+            categoryContainer.appendChild(categoryHeading);
 
-          // Loop through the assets in the category and generate HTML for each
-          assets.forEach((asset) => {
-            const assetElement = document.createElement('div');
-            assetElement.classList.add('asset-item');
+            // Loop through the assets in the category and generate HTML for each
+            assetsInCategory.forEach((asset) => {
+              const assetElement = document.createElement('div');
+              assetElement.classList.add('asset-item');
 
-            // Customize this part to display the asset details
-            assetElement.innerHTML = `
-              <a href="${asset.downloadURL}" target="_blank">
-                <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                <p>${asset.filename}</p>
-              </a>
-            `;
+              // Customize this part to display the asset details
+              assetElement.innerHTML = `
+                <a href="${asset.downloadURL}" target="_blank">
+                  <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+                  <p>${asset.filename}</p>
+                </a>
+              `;
 
-            categoryContainer.appendChild(assetElement);
-          });
+              categoryContainer.appendChild(assetElement);
+            });
 
-          // Append the category container to the assets container
-          assetsContainer.appendChild(categoryContainer);
+            // Append the category container to the assets container
+            assetsContainer.appendChild(categoryContainer);
+          }
+        } else {
+          // Loop through all categories and generate HTML for each
+          for (const [category, assets] of Object.entries(categorizedAssets)) {
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('asset-category');
+
+            // Create a heading for the category
+            const categoryHeading = document.createElement('h2');
+            categoryHeading.textContent = category;
+            categoryContainer.appendChild(categoryHeading);
+
+            // Loop through the assets in the category and generate HTML for each
+            assets.forEach((asset) => {
+              const assetElement = document.createElement('div');
+              assetElement.classList.add('asset-item');
+
+              // Customize this part to display the asset details
+              assetElement.innerHTML = `
+                <a href="${asset.downloadURL}" target="_blank">
+                  <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+                  <p>${asset.filename}</p>
+                </a>
+              `;
+
+              categoryContainer.appendChild(assetElement);
+            });
+
+            // Append the category container to the assets container
+            assetsContainer.appendChild(categoryContainer);
+          }
         }
       } else {
         console.error('Error fetching user assets:', data.error);

@@ -60,14 +60,31 @@
     <script>
         // Update the event listener to call filterUserAssets when the search button is clicked
         document.addEventListener('DOMContentLoaded', function () {
+
+            // Get the category from the query parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
             const searchButton = document.getElementById('search-button');
 
-            searchButton.addEventListener('click', function () {
-                filterPublicAssets();
-            });
+            // Call the function to display or filter assets based on the category
+            if (category) {
+                
+                searchButton.addEventListener('click', function () {
+                    filterPublicAssets(category);
+                });
         
-            // Display all public assets by default
-            displayPublicAssets();
+                // Display all public assets by default
+                displayPublicAssets(category);
+            } else {
+                
+                searchButton.addEventListener('click', function () {
+                    filterPublicAssets();
+                });
+        
+                // Display all public assets by default
+                displayPublicAssets();
+            }
+            
         });
     </script>
 </body>
