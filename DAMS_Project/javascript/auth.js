@@ -358,6 +358,21 @@ function getFileType(filename) {
   return extension.toLowerCase();
 }
 
+function generateAssetHTML(asset) {
+  const assetElement = document.createElement('div');
+  assetElement.classList.add('asset-item');
+
+  // Customize this part to display the asset details
+  assetElement.innerHTML = `
+    <a href="${asset.downloadURL}" target="_blank">
+      <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+      <p>${asset.filename}</p>
+    </a>
+  `;
+
+  return assetElement;
+}
+
 // Function to fetch and display user's assets with categories
 async function displayUserAssets() {
   const firebaseUid = localStorage.getItem('firebaseUid');
@@ -388,17 +403,7 @@ async function displayUserAssets() {
 
           // Loop through the assets in the category and generate HTML for each
           assets.forEach((asset) => {
-            const assetElement = document.createElement('div');
-            assetElement.classList.add('asset-item');
-
-            // Customize this part to display the asset details
-            assetElement.innerHTML = `
-              <a href="${asset.downloadURL}" target="_blank">
-                <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                <p>${asset.filename}</p>
-              </a>
-            `;
-
+            const assetElement = generateAssetHTML(asset);
             categoryContainer.appendChild(assetElement);
           });
 
@@ -458,17 +463,7 @@ function filterUserAssets() {
 
           // Loop through the assets in the category and generate HTML for each
           assets.forEach((asset) => {
-            const assetElement = document.createElement('div');
-            assetElement.classList.add('asset-item');
-
-            // Customize this part to display the asset details
-            assetElement.innerHTML = `
-              <a href="${asset.downloadURL}" target="_blank">
-                <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                <p>${asset.filename}</p>
-              </a>
-            `;
-
+            const assetElement = generateAssetHTML(asset);
             categoryContainer.appendChild(assetElement);
           });
 
@@ -513,17 +508,7 @@ async function displayPublicAssets(category = null) {
 
             // Loop through the assets in the category and generate HTML for each
             assetsInCategory.forEach((asset) => {
-              const assetElement = document.createElement('div');
-              assetElement.classList.add('asset-item');
-
-              // Customize this part to display the asset details
-              assetElement.innerHTML = `
-                <a href="${asset.downloadURL}" target="_blank">
-                  <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                  <p>${asset.filename}</p>
-                </a>
-              `;
-
+              const assetElement = generateAssetHTML(asset);
               categoryContainer.appendChild(assetElement);
             });
 
@@ -543,17 +528,7 @@ async function displayPublicAssets(category = null) {
 
             // Loop through the assets in the category and generate HTML for each
             assets.forEach((asset) => {
-              const assetElement = document.createElement('div');
-              assetElement.classList.add('asset-item');
-
-              // Customize this part to display the asset details
-              assetElement.innerHTML = `
-                <a href="${asset.downloadURL}" target="_blank">
-                  <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                  <p>${asset.filename}</p>
-                </a>
-              `;
-
+              const assetElement = generateAssetHTML(asset);
               categoryContainer.appendChild(assetElement);
             });
 
@@ -613,17 +588,7 @@ function filterPublicAssets(category = null) {
 
             // Loop through the assets in the category and generate HTML for each
             assetsInCategory.forEach((asset) => {
-              const assetElement = document.createElement('div');
-              assetElement.classList.add('asset-item');
-
-              // Customize this part to display the asset details
-              assetElement.innerHTML = `
-                <a href="${asset.downloadURL}" target="_blank">
-                  <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                  <p>${asset.filename}</p>
-                </a>
-              `;
-
+              const assetElement = generateAssetHTML(asset);
               categoryContainer.appendChild(assetElement);
             });
 
@@ -643,17 +608,7 @@ function filterPublicAssets(category = null) {
 
             // Loop through the assets in the category and generate HTML for each
             assets.forEach((asset) => {
-              const assetElement = document.createElement('div');
-              assetElement.classList.add('asset-item');
-
-              // Customize this part to display the asset details
-              assetElement.innerHTML = `
-                <a href="${asset.downloadURL}" target="_blank">
-                  <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-                  <p>${asset.filename}</p>
-                </a>
-              `;
-
+              const assetElement = generateAssetHTML(asset);
               categoryContainer.appendChild(assetElement);
             });
 
