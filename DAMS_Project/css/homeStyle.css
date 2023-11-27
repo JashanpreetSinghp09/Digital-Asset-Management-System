@@ -9,7 +9,7 @@ input::placeholder {
     font-family: 'Exo 2', sans-serif;
 }
 
-h1, .black-spaced {
+h1, h2, .black-spaced {
     letter-spacing: 5px;
     color: black;
 }
