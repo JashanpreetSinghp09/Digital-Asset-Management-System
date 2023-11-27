@@ -358,20 +358,49 @@ function getFileType(filename) {
   return extension.toLowerCase();
 }
 
+// Helper function to generate HTML for each asset
 function generateAssetHTML(asset) {
   const assetElement = document.createElement('div');
   assetElement.classList.add('asset-item');
 
-  // Customize this part to display the asset details
-  assetElement.innerHTML = `
-    <a href="${asset.downloadURL}" target="_blank">
-      <img src="${asset.thumbnailURL}" alt="${asset.filename}">
-      <p>${asset.filename}</p>
-    </a>
-  `;
+  // Determine the asset type based on the contentType
+  let mediaTag;
+  if (asset.contentType.startsWith('image/')) {
+    mediaTag = 'img';
+  } else if (asset.contentType.startsWith('video/')) {
+    mediaTag = 'video';
+  } else if (asset.contentType.startsWith('audio/')) {
+    mediaTag = 'audio';
+  } else {
+    // If the type is not recognized, default to an image tag
+    mediaTag = 'img';
+  }
+
+  // Create a link to the download route
+  const downloadLink = document.createElement('a');
+  downloadLink.href = `/download/${asset._id}`;
+  downloadLink.target = '_blank';
+
+  // Create the media element based on the asset type
+  const mediaElement = document.createElement(mediaTag);
+  mediaElement.src = `/download/${asset._id}`;
+  mediaElement.alt = asset.filename;
+  mediaElement.controls = true;
+
+  // Create a paragraph to display the filename
+  const filenameParagraph = document.createElement('p');
+  filenameParagraph.textContent = asset.filename;
+
+  // Append the media element and filename paragraph to the link
+  downloadLink.appendChild(mediaElement);
+  downloadLink.appendChild(filenameParagraph);
+
+  // Append the link to the asset element
+  assetElement.appendChild(downloadLink);
 
   return assetElement;
 }
+
 
 // Function to fetch and display user's assets with categories
 async function displayUserAssets() {

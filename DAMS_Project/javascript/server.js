@@ -15,6 +15,7 @@ const uri = "mongodb+srv://dams-3565b:dams-3565b@dams.lp0lkjv.mongodb.net/?retry
 
 // Declare gfs at the top level
 let gfs;
+let gridFSBucket;
 
 async function initializeFirebase(){
 
@@ -41,6 +42,11 @@ async function startServer() {
     conn.once('open', () => {
       gfs = Grid(conn.db, mongoose.mongo);
       gfs.collection('uploads');
+
+      // Initialize GridFSBucket
+      gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'uploads',
+      });
     });
 
     const storage = new GridFsStorage({
@@ -234,6 +240,34 @@ app.get('/get-files', async (req, res) => {
     res.json({ success: false, error: 'Error fetching files without firebaseUid' });
   }
 });
+
+// The route to download a file
+// The route to download a file
+// The route to download a file
+app.get('/download/:fileId', async (req, res) => {
+  try {
+    if (!gfs) {
+      gfs = Grid(mongoose.connection.db, mongoose.mongo);
+      gfs.collection('uploads');
+    }
+
+    // Ensure gridFSBucket is initialized
+    if (!gridFSBucket) {
+      gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'uploads',
+      });
+    }
+
+    const fileId = mongoose.Types.ObjectId(req.params.fileId);
+
+    const downloadStream = gridFSBucket.openDownloadStream(fileId);
+    downloadStream.pipe(res);
+  } catch (error) {
+    console.error('Error downloading file:', error);
+    res.status(500).json({ success: false, error: 'Error downloading file' });
+  }
+});
+
 
 
 //Pointing the server.js to index.html
