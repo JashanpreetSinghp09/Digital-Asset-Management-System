@@ -312,6 +312,13 @@ function categorizeAssets(assets) {
     }
   });
 
+  // Remove categories with empty arrays
+  for (const category in categorizedAssets) {
+    if (categorizedAssets[category].length === 0) {
+      delete categorizedAssets[category];
+    }
+  }
+
   return categorizedAssets;
 }
 
