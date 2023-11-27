@@ -13,6 +13,9 @@ const app = express();
 
 const uri = "mongodb+srv://dams-3565b:dams-3565b@dams.lp0lkjv.mongodb.net/?retryWrites=true&w=majority";
 
+// Declare gfs at the top level
+let gfs;
+
 async function initializeFirebase(){
 
   try {
@@ -34,9 +37,6 @@ async function startServer() {
     mongoose.set('strictQuery', false);
 
     const conn = mongoose.connection;
-    // Init gfs
-    let gfs;
-    
 
     conn.once('open', () => {
       gfs = Grid(conn.db, mongoose.mongo);
@@ -194,10 +194,19 @@ app.post('/upload', upload.single('file'), (req, res) => {
 app.get('/get-user-assets', async (req, res) => {
   const { firebaseUid } = req.query; 
 
-  // Query your database to retrieve the user's assets
-  const userAssets = await gfs.files.find({ firebaseUid }); // Replace YourAssetModel with your actual model
+  try {
+    if (!gfs) {
+      gfs = Grid(mongoose.connection.db, mongoose.mongo);
+      gfs.collection('uploads');
+    }
 
-  res.json({ success: true, assets: userAssets });
+    const userAssets = await gfs.files.find({ 'metadata.firebaseUid': firebaseUid }).toArray();
+
+    res.json({ success: true, assets: userAssets });
+  } catch (error) {
+    console.error('Error fetching user assets:', error);
+    res.json({ success: false, error: 'Error fetching user assets' });
+  }
 });
 
 ////////////////////////////////

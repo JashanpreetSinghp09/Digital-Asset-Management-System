@@ -80,7 +80,11 @@ function SignIn() {
     console.log("You are Signed In!");
     console.log(result);
 
-    // Storing the email locally for future reference
+    // Get the UID from the result
+    const firebaseUid = result.user.uid;
+
+    // Storing the UID and email locally for future reference
+    localStorage.setItem('firebaseUid', firebaseUid);
     localStorage.setItem('email', email);
 
     window.location.href = "home.html";
@@ -283,6 +287,7 @@ async function displayUserAssets() {
        .then((response) => response.json())
        .then((data) => {
            if (data.success) {
+            console.log(data.assets);
                const assetsContainer = document.querySelector('.assets');
  
                // Loop through the user's assets and generate HTML for each
