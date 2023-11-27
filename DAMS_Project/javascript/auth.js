@@ -242,6 +242,36 @@ function DeleteUser(){
       console.error('Request error:', error);
     });
 }
+async function uploadPublicFile() {
+  const fileInput = document.getElementById('file-input');
+  const tagsInput = document.getElementById('tags-input');
+  const descriptionInput = document.getElementById('description-input');
+
+  const formData = new FormData();
+  formData.append('tags', tagsInput.value);
+  formData.append('description', descriptionInput.value);
+  formData.append('file', fileInput.files[0]);
+
+  fetch('/upload', {
+    method: 'POST',
+    body: formData,
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // File uploaded successfully
+      window.alert("File Upload Success");
+    } else {
+      // File upload failed
+      window.alert("File Upload Failed: " + data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    window.alert('File upload error: ' + error.message);
+  });
+}
+
 async function uploadFile() {
   const fileInput = document.getElementById('file-input');
   const tagsInput = document.getElementById('tags-input');
@@ -414,6 +444,61 @@ function filterUserAssets() {
 
         // Organize filtered assets into categories
         const categorizedAssets = categorizeAssets(filteredAssets);
+
+        // Loop through the categories and generate HTML for each
+        for (const [category, assets] of Object.entries(categorizedAssets)) {
+          // Create a category container
+          const categoryContainer = document.createElement('div');
+          categoryContainer.classList.add('asset-category');
+
+          // Create a heading for the category
+          const categoryHeading = document.createElement('h2');
+          categoryHeading.textContent = category;
+          categoryContainer.appendChild(categoryHeading);
+
+          // Loop through the assets in the category and generate HTML for each
+          assets.forEach((asset) => {
+            const assetElement = document.createElement('div');
+            assetElement.classList.add('asset-item');
+
+            // Customize this part to display the asset details
+            assetElement.innerHTML = `
+              <a href="${asset.downloadURL}" target="_blank">
+                <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+                <p>${asset.filename}</p>
+              </a>
+            `;
+
+            categoryContainer.appendChild(assetElement);
+          });
+
+          // Append the category container to the assets container
+          assetsContainer.appendChild(categoryContainer);
+        }
+      } else {
+        console.error('Error fetching user assets:', data.error);
+      }
+    })
+    .catch((error) => {
+      console.error('Fetch error:', error);
+    });
+}
+
+// Function to fetch and display user's assets with categories
+async function displayPublicAssets() {
+
+  // Fetch the user's assets from the server
+  fetch(`/get-files`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        const assetsContainer = document.querySelector('.categories');
+
+        // Clear the current contents of the assets div
+        assetsContainer.innerHTML = '';
+
+        // Organize assets into categories
+        const categorizedAssets = categorizeAssets(data.assets);
 
         // Loop through the categories and generate HTML for each
         for (const [category, assets] of Object.entries(categorizedAssets)) {

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Upload</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Assests</title>
     <link rel="stylesheet" href="../css/homeStyle.css">
-    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="shortcut icon" type="image/png" href="../images/dams_logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
@@ -36,42 +40,29 @@
         </nav>
     </header>
 
-    <main class="hero">
-
-        <form class="file-upload" enctype="multipart/form-data">
-            <!-- Contact detail -->
-            <div class="bg-secondary-soft px-4 py-5 rounded">
-                <h1>Upload</h1>
-                <br>
-                <!-- First Name -->
-                <div class="fields">
-                    <label class="h3" for="file-input"> Upload Images/Videos/GIFs/Audio <br>(.jpg, .jpeg, .png, .pdf, .mp3, .mp4, .gif)</label> <br> </br>
-                    <input type="file" name="file" id="file-input" accept=".jpg, .jpeg, .png, .pdf, .mp3, .mp4, .gif" required>
-
-                </div>
-                <br>
-                <!-- Last name -->
-                <div class="fields">
-                    <label class="h3" for="tags-input">Tags</label>
-                    <input type="text" class="form-control" id="tags-input" placeholder="Add tags (comma-separated)" required>
-                </div>
-                <br>
-                <!-- Username/Email -->
-                <div class="fields">
-                    <label class="h3" for="description-input">Description</label>
-                    <textarea id="description-input" class="form-control" placeholder="Brief description" required></textarea>
-                </div>
-                <br>
-                <button type="button" class="cta-button" id="upload-button" onclick="uploadFile()">Upload</button>
-                <button type="button" class="cta-button" id="upload-button" onclick="uploadPublicFile()">Guest Upload</button>
+    <main>
+        <section class="hero">
+            <h1>PUBLIC ASSETS</h1>
+            <p class="content-description"> Explore the public assets of our system. You can view files with ease.</p>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search assets...">
+                <button id="search-button"><img src="../images/search-icon.png" alt="Search"></button>
             </div>
-        </form>  
-        <!-- Add more sections for your content here -->
+            <!-- Add more sections for your content here -->
+            <div class="categories"></div>
+        </section>
     </main>
 
     <footer class="footer">
         <p>&copy; 2023 Digital Asset Management System</p>
     </footer>
     <script src="../javascript/auth.js"></script>
+    <script>
+        // Update the event listener to call filterUserAssets when the search button is clicked
+        document.addEventListener('DOMContentLoaded', function () {
+        
+            displayPublicAssets();
+        });
+    </script>
 </body>
 </html>

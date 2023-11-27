@@ -44,20 +44,26 @@ async function startServer() {
     });
 
     const storage = new GridFsStorage({
-      url: uri ,
+      url: uri,
       options: { useNewUrlParser: true, useUnifiedTopology: true },
       file: (req, file) => {
+        const metadata = {
+          tags: req.body.tags,
+          description: req.body.description,
+        };
+    
+        if (req.body.firebaseUid) {
+          metadata.firebaseUid = req.body.firebaseUid;
+        }
+    
         return {
-          bucketName: 'uploads', // Set the name of the bucket
+          bucketName: 'uploads',
           filename: file.originalname,
-          metadata: {
-            firebaseUid: req.body.firebaseUid,
-            tags: req.body.tags,
-            description: req.body.description,
-          },
+          metadata: metadata,
         };
       },
     });
+    
 
     const upload = multer({ storage });
   
@@ -206,6 +212,29 @@ app.get('/get-user-assets', async (req, res) => {
     res.json({ success: false, error: 'Error fetching user assets' });
   }
 });
+
+app.get('/get-files', async (req, res) => {
+  try {
+    if (!gfs) {
+      gfs = Grid(mongoose.connection.db, mongoose.mongo);
+      gfs.collection('uploads');
+    }
+
+    // Find files where 'metadata.firebaseUid' is null or not present
+    const publicAssests = await gfs.files.find({
+      $or: [
+        { 'metadata.firebaseUid': null },
+        { 'metadata.firebaseUid': { $exists: false } },
+      ],
+    }).toArray();
+
+    res.json({ success: true, assets: publicAssests });
+  } catch (error) {
+    console.error('Error fetching files without firebaseUid:', error);
+    res.json({ success: false, error: 'Error fetching files without firebaseUid' });
+  }
+});
+
 
 //Pointing the server.js to index.html
 app.get('/', (req, res) => {
