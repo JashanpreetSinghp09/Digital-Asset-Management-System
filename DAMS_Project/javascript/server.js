@@ -186,11 +186,9 @@ app.get('/getUid', async (req, res) => {
 
 app.post('/upload', upload.single('file'), (req, res) => {
 
-  
 });
 
 
-/////////////  get user assets ///////////////////
 app.get('/get-user-assets', async (req, res) => {
   const { firebaseUid } = req.query; 
 
@@ -208,8 +206,6 @@ app.get('/get-user-assets', async (req, res) => {
     res.json({ success: false, error: 'Error fetching user assets' });
   }
 });
-
-////////////////////////////////
 
 //Pointing the server.js to index.html
 app.get('/', (req, res) => {

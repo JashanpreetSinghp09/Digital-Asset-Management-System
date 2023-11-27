@@ -312,4 +312,106 @@ async function displayUserAssets() {
        .catch((error) => {
            console.error('Fetch error:', error);
        });
- }
+}
+
+// Function to filter user's assets based on search query
+function filterUserAssets() {
+  const searchInput = document.getElementById('search-input');
+  const searchQuery = searchInput.value.trim().toLowerCase();
+
+  // If the search query is empty, just display all assets
+  if (searchQuery === '') {
+    displayUserAssets();
+    return;
+  }
+
+  // Otherwise, fetch the assets and filter them based on the search query
+  const firebaseUid = localStorage.getItem('firebaseUid');
+  fetch(`/get-user-assets?firebaseUid=${firebaseUid}`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        const assetsContainer = document.querySelector('.assets');
+
+        // Clear the current contents of the assets div
+        assetsContainer.innerHTML = '';
+
+        // Filter assets based on the search query
+        const filteredAssets = data.assets.filter((asset) =>
+          asset.filename.toLowerCase().includes(searchQuery)
+        );
+
+        // Loop through the filtered assets and generate HTML for each
+        filteredAssets.forEach((asset) => {
+          const assetElement = document.createElement('div');
+          assetElement.classList.add('asset-item');
+
+          // Customize this part to display the asset details
+          assetElement.innerHTML = `
+            <a href="${asset.downloadURL}" target="_blank">
+              <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+              <p>${asset.filename}</p>
+            </a>
+          `;
+
+          assetsContainer.appendChild(assetElement);
+        });
+      } else {
+        console.error('Error fetching user assets:', data.error);
+      }
+    })
+    .catch((error) => {
+      console.error('Fetch error:', error);
+    });
+}
+
+// Function to filter user's assets based on search query
+function filterUserAssets() {
+  const searchInput = document.getElementById('search-input');
+  const searchQuery = searchInput.value.trim().toLowerCase();
+
+  // If the search query is empty, just display all assets
+  if (searchQuery === '') {
+    displayUserAssets();
+    return;
+  }
+
+  // Otherwise, fetch the assets and filter them based on the search query
+  const firebaseUid = localStorage.getItem('firebaseUid');
+  fetch(`/get-user-assets?firebaseUid=${firebaseUid}`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        const assetsContainer = document.querySelector('.assets');
+
+        // Clear the current contents of the assets div
+        assetsContainer.innerHTML = '';
+
+        // Filter assets based on the search query
+        const filteredAssets = data.assets.filter((asset) =>
+          asset.filename.toLowerCase().includes(searchQuery)
+        );
+
+        // Loop through the filtered assets and generate HTML for each
+        filteredAssets.forEach((asset) => {
+          const assetElement = document.createElement('div');
+          assetElement.classList.add('asset-item');
+
+          // Customize this part to display the asset details
+          assetElement.innerHTML = `
+            <a href="${asset.downloadURL}" target="_blank">
+              <img src="${asset.thumbnailURL}" alt="${asset.filename}">
+              <p>${asset.filename}</p>
+            </a>
+          `;
+
+          assetsContainer.appendChild(assetElement);
+        });
+      } else {
+        console.error('Error fetching user assets:', data.error);
+      }
+    })
+    .catch((error) => {
+      console.error('Fetch error:', error);
+    });
+}
