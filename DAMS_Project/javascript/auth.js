@@ -363,17 +363,42 @@ function generateAssetHTML(asset) {
   const assetElement = document.createElement('div');
   assetElement.classList.add('asset-item');
 
-  // Determine the asset type based on the contentType
-  let mediaTag;
+  // Determine the asset type based on the file extension or contentType
+  let mediaTag, width, height;
   if (asset.contentType.startsWith('image/')) {
     mediaTag = 'img';
+    width = '500';
+    height = '500';
   } else if (asset.contentType.startsWith('video/')) {
     mediaTag = 'video';
+    width = '500';
+    height = '500';
   } else if (asset.contentType.startsWith('audio/')) {
     mediaTag = 'audio';
+  } else if (asset.contentType === 'application/pdf') {
+    // For PDF files, use an iframe
+    mediaTag = 'iframe';
+    width = '100%';
+    height = '500px'; // Adjust the height as needed
   } else {
-    // If the type is not recognized, default to an image tag
-    mediaTag = 'img';
+    // For other file types, use an image tag by checking the file extension
+    const fileExtension = asset.filename.split('.').pop().toLowerCase();
+    if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+      mediaTag = 'img';
+      width = '500';
+      height = '500';
+    } else if (['mp3'].includes(fileExtension)) {
+      mediaTag = 'audio';
+    } else if (['mp4'].includes(fileExtension)) {
+      mediaTag = 'video';
+      width = '500';
+      height = '500';
+    } else {
+      // If the type is not recognized, default to an image tag
+      mediaTag = 'img';
+      width = '500';
+      height = '500';
+    }
   }
 
   // Create a link to the download route
@@ -386,6 +411,10 @@ function generateAssetHTML(asset) {
   mediaElement.src = `/download/${asset._id}`;
   mediaElement.alt = asset.filename;
   mediaElement.controls = true;
+
+  // Set width and height attributes
+  mediaElement.width = width;
+  mediaElement.height = height;
 
   // Create a paragraph to display the filename
   const filenameParagraph = document.createElement('p');
@@ -400,7 +429,6 @@ function generateAssetHTML(asset) {
 
   return assetElement;
 }
-
 
 // Function to fetch and display user's assets with categories
 async function displayUserAssets() {
