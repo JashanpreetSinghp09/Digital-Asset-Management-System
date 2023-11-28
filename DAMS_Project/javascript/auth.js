@@ -457,6 +457,9 @@ async function deleteAsset(assetId) {
     if (result.success) {
       // Asset deleted successfully, update the UI or handle as needed
       console.log('Asset deleted successfully');
+
+      // Reload the page
+      window.location.reload();
     } else {
       // Handle the case where deletion failed
       console.error('Error deleting asset:', result.error);
