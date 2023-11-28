@@ -241,9 +241,8 @@ app.get('/get-files', async (req, res) => {
   }
 });
 
-// The route to download a file
-// The route to download a file
-// The route to download a file
+
+// The route to display and download a file
 app.get('/download/:fileId', async (req, res) => {
   try {
     if (!gfs) {
@@ -268,7 +267,30 @@ app.get('/download/:fileId', async (req, res) => {
   }
 });
 
+// The route to delete a file
+app.delete('/delete/:fileId', async (req, res) => {
+  try {
+    // Ensure gridFSBucket is initialized
+    if (!gridFSBucket) {
+      gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'uploads',
+      });
+    }
 
+    const fileId = mongoose.Types.ObjectId(req.params.fileId);
+
+    // Delete the file from GridFS
+    await gridFSBucket.delete(fileId);
+
+    // Also delete the corresponding metadata entry
+    await gfs.files.deleteOne({ _id: fileId });
+
+    res.json({ success: true, message: 'File deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting file:', error);
+    res.status(500).json({ success: false, error: 'Error deleting file' });
+  }
+});
 
 //Pointing the server.js to index.html
 app.get('/', (req, res) => {

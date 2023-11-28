@@ -401,11 +401,6 @@ function generateAssetHTML(asset) {
     }
   }
 
-  // Create a link to the download route
-  const downloadLink = document.createElement('a');
-  downloadLink.href = `/download/${asset._id}`;
-  downloadLink.target = '_blank';
-
   // Create the media element based on the asset type
   const mediaElement = document.createElement(mediaTag);
   mediaElement.src = `/download/${asset._id}`;
@@ -416,18 +411,59 @@ function generateAssetHTML(asset) {
   mediaElement.width = width;
   mediaElement.height = height;
 
+  // Create a link to the download route
+  const downloadLink = document.createElement('a');
+  downloadLink.href = `/download/${asset._id}`;
+  downloadLink.target = '_blank';
+
   // Create a paragraph to display the filename
   const filenameParagraph = document.createElement('p');
   filenameParagraph.textContent = asset.filename;
 
-  // Append the media element and filename paragraph to the link
-  downloadLink.appendChild(mediaElement);
-  downloadLink.appendChild(filenameParagraph);
+  // Create a delete button
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete';
+  deleteButton.classList.add('delete_btn');
+  deleteButton.addEventListener('click', () => {
+    // Call a function to delete the asset on the server
+    deleteAsset(asset._id);
+  });
+
+  // Append the media element to the asset element
+  assetElement.appendChild(mediaElement);
 
   // Append the link to the asset element
   assetElement.appendChild(downloadLink);
 
+  // Append the filename paragraph to the link
+  downloadLink.appendChild(filenameParagraph);
+
+  // Append the delete button to the asset element
+  assetElement.appendChild(deleteButton);
+
   return assetElement;
+}
+
+
+// Function to delete an asset on the server
+async function deleteAsset(assetId) {
+  try {
+    const response = await fetch(`/delete/${assetId}`, {
+      method: 'DELETE',
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Asset deleted successfully, update the UI or handle as needed
+      console.log('Asset deleted successfully');
+    } else {
+      // Handle the case where deletion failed
+      console.error('Error deleting asset:', result.error);
+    }
+  } catch (error) {
+    console.error('Error deleting asset:', error);
+  }
 }
 
 // Function to fetch and display user's assets with categories
