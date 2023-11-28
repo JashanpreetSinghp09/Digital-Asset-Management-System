@@ -55,25 +55,21 @@ nav {
 }
 
 .categories, .assets {
-    width: 60%;
     margin: 0 auto;
     padding: 20px;
+    height: auto;
 }
   
 .asset-category {
-    border: 3px solid #b4b4b4;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
 }
   
 .asset-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: calc(33.33% - 10px);
+    justify-content: space-between;
 }
-  
+
 .asset-item img {
     width: auto;
     height: auto;
