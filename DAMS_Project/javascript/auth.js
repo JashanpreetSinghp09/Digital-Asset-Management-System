@@ -258,17 +258,11 @@ async function uploadPublicFile() {
   })
   .then(response => response.json())
   .then(data => {
-    if (data.success) {
-      // File uploaded successfully
-      window.alert("File Upload Success");
-    } else {
-      // File upload failed
-      window.alert("File Upload Failed: " + data.message);
-    }
+    
+    window.alert(data.message);
   })
   .catch(error => {
-    console.error('Error:', error);
-    window.alert('File upload error: ' + error.message);
+    window.alert('Error:', error);
   });
 }
 
@@ -293,17 +287,11 @@ async function uploadFile() {
   })
   .then(response => response.json())
   .then(data => {
-    if (data.success) {
-      // File uploaded successfully
-      window.alert("File Upload Success");
-    } else {
-      // File upload failed
-      window.alert("File Upload Failed: " + data.message);
-    }
+    
+    window.alert(data.message);
   })
   .catch(error => {
-    console.error('Error:', error);
-    window.alert('File upload error: ' + error.message);
+    window.alert('Error:', error);
   });
 }
 
