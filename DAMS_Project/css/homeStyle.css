@@ -50,6 +50,67 @@ nav {
     padding: 0 20px;
 }
 
+.categories h2 {
+    margin-bottom: 20px;
+}
+
+.categories, .assets {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+}
+  
+.asset-category {
+    border: 3px solid #b4b4b4;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+}
+  
+.asset-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+.asset-item img {
+    width: auto;
+    height: auto;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 250px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    margin-top: 50px;
+}
+
+.asset-item video {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    margin-top: 50px;
+}
+
+.asset-item audio {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-top: 50px;
+}
+
+.asset-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+  
+.asset-item a:hover {
+    color: red;
+}
+
+  
+
 /* Style for the categories dropdown */
 .categories-dropdown {
     display: none;

@@ -363,41 +363,38 @@ function generateAssetHTML(asset) {
   const assetElement = document.createElement('div');
   assetElement.classList.add('asset-item');
 
+  // Create a link to the download route
+  const downloadLink = document.createElement('a');
+  downloadLink.href = `/download/${asset._id}`;
+  downloadLink.target = '_blank';
+  
+  // Create a paragraph to display the filename
+  const filenameParagraph = document.createElement('p');
+  filenameParagraph.textContent = asset.filename;
+
   // Determine the asset type based on the file extension or contentType
   let mediaTag, width, height;
   if (asset.contentType.startsWith('image/')) {
     mediaTag = 'img';
-    width = '500';
-    height = '500';
   } else if (asset.contentType.startsWith('video/')) {
     mediaTag = 'video';
-    width = '500';
-    height = '500';
   } else if (asset.contentType.startsWith('audio/')) {
     mediaTag = 'audio';
   } else if (asset.contentType === 'application/pdf') {
     // For PDF files, use an iframe
     mediaTag = 'iframe';
-    width = '100%';
-    height = '500px'; // Adjust the height as needed
   } else {
     // For other file types, use an image tag by checking the file extension
     const fileExtension = asset.filename.split('.').pop().toLowerCase();
     if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
       mediaTag = 'img';
-      width = '500';
-      height = '500';
     } else if (['mp3'].includes(fileExtension)) {
       mediaTag = 'audio';
     } else if (['mp4'].includes(fileExtension)) {
       mediaTag = 'video';
-      width = '500';
-      height = '500';
     } else {
       // If the type is not recognized, default to an image tag
       mediaTag = 'img';
-      width = '500';
-      height = '500';
     }
   }
 
@@ -410,15 +407,6 @@ function generateAssetHTML(asset) {
   // Set width and height attributes
   mediaElement.width = width;
   mediaElement.height = height;
-
-  // Create a link to the download route
-  const downloadLink = document.createElement('a');
-  downloadLink.href = `/download/${asset._id}`;
-  downloadLink.target = '_blank';
-
-  // Create a paragraph to display the filename
-  const filenameParagraph = document.createElement('p');
-  filenameParagraph.textContent = asset.filename;
 
   // Create a delete button
   const deleteButton = document.createElement('button');
@@ -448,41 +436,38 @@ function generatePublicAssetHTML(asset) {
   const assetElement = document.createElement('div');
   assetElement.classList.add('asset-item');
 
+    // Create a link to the download route
+    const downloadLink = document.createElement('a');
+    downloadLink.href = `/download/${asset._id}`;
+    downloadLink.target = '_blank';
+  
+    // Create a paragraph to display the filename
+    const filenameParagraph = document.createElement('p');
+    filenameParagraph.textContent = asset.filename;
+
   // Determine the asset type based on the file extension or contentType
   let mediaTag, width, height;
   if (asset.contentType.startsWith('image/')) {
     mediaTag = 'img';
-    width = '500';
-    height = '500';
   } else if (asset.contentType.startsWith('video/')) {
     mediaTag = 'video';
-    width = '500';
-    height = '500';
   } else if (asset.contentType.startsWith('audio/')) {
     mediaTag = 'audio';
   } else if (asset.contentType === 'application/pdf') {
     // For PDF files, use an iframe
     mediaTag = 'iframe';
-    width = '100%';
-    height = '500px'; // Adjust the height as needed
   } else {
     // For other file types, use an image tag by checking the file extension
     const fileExtension = asset.filename.split('.').pop().toLowerCase();
     if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
       mediaTag = 'img';
-      width = '500';
-      height = '500';
     } else if (['mp3'].includes(fileExtension)) {
       mediaTag = 'audio';
     } else if (['mp4'].includes(fileExtension)) {
       mediaTag = 'video';
-      width = '500';
-      height = '500';
     } else {
       // If the type is not recognized, default to an image tag
       mediaTag = 'img';
-      width = '500';
-      height = '500';
     }
   }
 
@@ -495,15 +480,6 @@ function generatePublicAssetHTML(asset) {
   // Set width and height attributes
   mediaElement.width = width;
   mediaElement.height = height;
-
-  // Create a link to the download route
-  const downloadLink = document.createElement('a');
-  downloadLink.href = `/download/${asset._id}`;
-  downloadLink.target = '_blank';
-
-  // Create a paragraph to display the filename
-  const filenameParagraph = document.createElement('p');
-  filenameParagraph.textContent = asset.filename;
 
   // Append the media element to the asset element
   assetElement.appendChild(mediaElement);
