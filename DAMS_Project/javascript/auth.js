@@ -777,7 +777,7 @@ function filterPublicAssets(category = null) {
 
             // Loop through the assets in the category and generate HTML for each
             assets.forEach((asset) => {
-              const assetElement = generatePuclicAssetHTML(asset);
+              const assetElement = generatePublicAssetHTML(asset);
               categoryContainer.appendChild(assetElement);
             });
 
