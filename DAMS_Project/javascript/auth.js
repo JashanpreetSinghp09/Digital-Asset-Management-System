@@ -613,9 +613,10 @@ function filterUserAssets() {
 
         // Filter assets based on the search query
         const filteredAssets = data.assets.filter((asset) =>
-          asset.filename.toLowerCase().includes(searchQuery)
+          asset.filename.toLowerCase().includes(searchQuery) ||
+          (asset.metadata && typeof asset.metadata.tags === 'string' && asset.metadata.tags.toLowerCase().includes(searchQuery))
         );
-
+        
         // Organize filtered assets into categories
         const categorizedAssets = categorizeAssets(filteredAssets);
 
@@ -737,8 +738,10 @@ function filterPublicAssets(category = null) {
 
         // Filter assets based on the search query
         const filteredAssets = data.assets.filter((asset) =>
-          asset.filename.toLowerCase().includes(searchQuery)
+          asset.filename.toLowerCase().includes(searchQuery) ||
+          (asset.metadata && typeof asset.metadata.tags === 'string' && asset.metadata.tags.toLowerCase().includes(searchQuery))
         );
+
 
         // Organize filtered assets into categories
         const categorizedAssets = categorizeAssets(filteredAssets);
