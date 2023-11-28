@@ -525,14 +525,14 @@ async function displayUserAssets() {
 
         // Loop through the categories and generate HTML for each
         for (const [category, assets] of Object.entries(categorizedAssets)) {
-          // Create a category container
-          const categoryContainer = document.createElement('div');
-          categoryContainer.classList.add('asset-category');
-
           // Create a heading for the category
           const categoryHeading = document.createElement('h2');
           categoryHeading.textContent = category;
-          categoryContainer.appendChild(categoryHeading);
+          assetsContainer.appendChild(categoryHeading);
+
+          // Create a category container
+          const categoryContainer = document.createElement('div');
+          categoryContainer.classList.add('asset-category');
 
           // Loop through the assets in the category and generate HTML for each
           assets.forEach((asset) => {
@@ -586,14 +586,14 @@ function filterUserAssets() {
 
         // Loop through the categories and generate HTML for each
         for (const [category, assets] of Object.entries(categorizedAssets)) {
-          // Create a category container
-          const categoryContainer = document.createElement('div');
-          categoryContainer.classList.add('asset-category');
-
           // Create a heading for the category
           const categoryHeading = document.createElement('h2');
           categoryHeading.textContent = category;
-          categoryContainer.appendChild(categoryHeading);
+          assetsContainer.appendChild(categoryHeading);
+
+          // Create a category container
+          const categoryContainer = document.createElement('div');
+          categoryContainer.classList.add('asset-category');
 
           // Loop through the assets in the category and generate HTML for each
           assets.forEach((asset) => {
@@ -632,13 +632,13 @@ async function displayPublicAssets(category = null) {
           // Display only the specified category
           const assetsInCategory = categorizedAssets[category];
           if (assetsInCategory) {
-            const categoryContainer = document.createElement('div');
-            categoryContainer.classList.add('asset-category');
-
             // Create a heading for the category
             const categoryHeading = document.createElement('h2');
             categoryHeading.textContent = category;
-            categoryContainer.appendChild(categoryHeading);
+            assetsContainer.appendChild(categoryHeading);
+
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('asset-category');
 
             // Loop through the assets in the category and generate HTML for each
             assetsInCategory.forEach((asset) => {
@@ -652,13 +652,13 @@ async function displayPublicAssets(category = null) {
         } else {
           // Loop through all categories and generate HTML for each
           for (const [category, assets] of Object.entries(categorizedAssets)) {
-            const categoryContainer = document.createElement('div');
-            categoryContainer.classList.add('asset-category');
-
             // Create a heading for the category
             const categoryHeading = document.createElement('h2');
             categoryHeading.textContent = category;
-            categoryContainer.appendChild(categoryHeading);
+            assetsContainer.appendChild(categoryHeading);
+
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('asset-category');
 
             // Loop through the assets in the category and generate HTML for each
             assets.forEach((asset) => {
@@ -714,13 +714,13 @@ function filterPublicAssets(category = null) {
           // Display only the specified category
           const assetsInCategory = categorizedAssets[category];
           if (assetsInCategory) {
-            const categoryContainer = document.createElement('div');
-            categoryContainer.classList.add('asset-category');
-
             // Create a heading for the category
             const categoryHeading = document.createElement('h2');
             categoryHeading.textContent = category;
-            categoryContainer.appendChild(categoryHeading);
+            assetsContainer.appendChild(categoryHeading);
+
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('asset-category');
 
             // Loop through the assets in the category and generate HTML for each
             assetsInCategory.forEach((asset) => {
@@ -734,13 +734,13 @@ function filterPublicAssets(category = null) {
         } else {
           // Loop through all categories and generate HTML for each
           for (const [category, assets] of Object.entries(categorizedAssets)) {
-            const categoryContainer = document.createElement('div');
-            categoryContainer.classList.add('asset-category');
-
             // Create a heading for the category
             const categoryHeading = document.createElement('h2');
             categoryHeading.textContent = category;
-            categoryContainer.appendChild(categoryHeading);
+            assetsContainer.appendChild(categoryHeading);
+
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('asset-category');
 
             // Loop through the assets in the category and generate HTML for each
             assets.forEach((asset) => {
