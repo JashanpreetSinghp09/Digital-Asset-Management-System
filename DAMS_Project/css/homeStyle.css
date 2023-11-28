@@ -51,7 +51,11 @@ nav {
 }
 
 .categories h2 {
-    margin-bottom: 20px;
+    margin-top: 35px;
+}
+
+.assets h2 {
+    margin-top: 35px;
 }
 
 .categories, .assets {
@@ -68,6 +72,7 @@ nav {
 .asset-item {
     width: calc(33.33% - 10px);
     justify-content: space-between;
+    margin-right: 10px;
 }
 
 .asset-item img {
@@ -264,7 +269,7 @@ nav {
 
 /* Style for the delete button */
 .delete_btn {
-    background-color: #ff0000;
+    background-color: #616161;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -275,5 +280,5 @@ nav {
   
   /* Hover effect for the delete button */
   .delete_btn:hover {
-    background-color: #ff5555;
+    background-color: #494949;
   }
