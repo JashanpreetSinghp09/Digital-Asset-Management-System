@@ -311,7 +311,6 @@ function categorizeAssets(assets) {
       case 'jpg':
       case 'jpeg':
       case 'png':
-      case 'pdf':
       case 'gif':
         categorizedAssets.Images.push(asset);
         break;
